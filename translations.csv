@@ -1,0 +1,29 @@
+Key,en,es,pt,it
+NPC_GAME,VS NPC,VERSUS NPC,CONTRA NPC,CONTRO NPC
+LOCAL_GAME,LOCAL GAME,PARTIDO LOCAL,PARTIDA LOCAL,PARTITA LOCALE
+MULTIPLAYER_GAME,MULTIPLAYER,MULTIJUGADOR,MULTIJOGADOR,MULTIGIOCATORE
+SETTINGS_BUTTON,SETTINGS,OPCIONES,CONFIGURACOES,OPZIONI
+EASY_MODE,EASY,FACIL,FACIL,FACILE
+MEDIUM_MODE,MEDIUM,MEDIO,MEDIO,MEDIO
+HARD_MODE,HARD,DIFICIL,DIFICIL,DIFFICILE
+HOST_GAME,HOST GAME,CREAR PARTIDA,CRIAR PARTIDA,OSPITA PARTITA
+JOIN_GAME,JOIN GAME,UNIRSE,ENTRAR,UNISCITI
+5_POINTS,5 POINTS,5 PUNTOS,5 PONTOS,5 PUNTI
+10_POINTS,10 POINTS,10 PUNTOS,10 PONTOS,10 PUNTI
+LANGUAGES_OPTION,LANGUAGE,IDIOMA,IDIOMA,LINGUA
+OLD_TV_OPTION,OLD TV SCREEN,EFECTO TV VIEJA,EFEITO TV ANTIGA,EFFETTO TV VECCHIA
+MUSIC_VOL,MUSIC,MUSICA,MUSICA,MUSICA
+SOUNDS_VOL,SOUNDS,SONIDOS,SONS,SUONI
+DISCLAIMER_MESSAGE,"Mario took a break from saving the princess to play some Pong!
+This is a non-profit fan-game.
+All characters, sounds, and sprites belong to Nintendo.
+No goombas were harmed in the making of this game.","¡Mario se tomó un descanso de salvar a la princesa para jugar un poco de Pong!
+Este es un fan-game sin fines de lucro.
+Todos los personajes, sonidos y sprites pertenecen a Nintendo.
+Ningún goomba fue lastimado en la creación de este juego.","Mario fez uma pausa de salvar a princesa para jogar um pouco de Pong!
+Este é um fan-game sem fins lucrativos.
+Todos os personagens, sons e sprites pertencem à Nintendo.
+Nenhum goomba foi ferido na criação deste jogo.","Mario si è preso una pausa dal salvare la principessa per giocare a Pong!
+Questo è un fan-game senza scopo di lucro.
+Tutti i personaggi, i suoni e gli sprite appartengono a Nintendo.
+Nessun goomba è stato maltrattato durante la creazione di questo gioco."

@@ -1,0 +1,122 @@
+[gd_scene format=3 uid="uid://ofqkf02ch6oy"]
+
+[ext_resource type="Script" uid="uid://etrulcudkr7q" path="res://Scripts/Godot/enemy.gd" id="1_287tu"]
+[ext_resource type="Texture2D" uid="uid://dr88a4mdw2302" path="res://Assets/Sprites/Other/buzzy_beetle.png" id="2_0830c"]
+[ext_resource type="Texture2D" uid="uid://bkx8xe3ny5yla" path="res://Assets/Sprites/Other/buzzy_hit.png" id="3_1dp5w"]
+[ext_resource type="Texture2D" uid="uid://deathnnol418r" path="res://Assets/Sprites/Other/galoomba.png" id="3_ghaa6"]
+[ext_resource type="Texture2D" uid="uid://tdv2bv26qt4r" path="res://Assets/Sprites/Other/koopa.png" id="4_1dp5w"]
+[ext_resource type="AudioStream" uid="uid://b3jfwxsvmaebf" path="res://Assets/Audio/SFXs/kick.wav" id="5_0830c"]
+[ext_resource type="Texture2D" uid="uid://b5eo5r6dc278l" path="res://Assets/Sprites/Other/koopa_hit.png" id="5_ghaa6"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_auwsv"]
+atlas = ExtResource("2_0830c")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8uf12"]
+atlas = ExtResource("2_0830c")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_56vhr"]
+atlas = ExtResource("3_1dp5w")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_po0sg"]
+atlas = ExtResource("3_ghaa6")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_haro7"]
+atlas = ExtResource("3_ghaa6")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0830c"]
+atlas = ExtResource("4_1dp5w")
+region = Rect2(0, 5, 16, 27)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ghaa6"]
+atlas = ExtResource("4_1dp5w")
+region = Rect2(16, 5, 16, 27)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1dp5w"]
+atlas = ExtResource("5_ghaa6")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_g7b7a"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_auwsv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8uf12")
+}],
+"loop": 1,
+"name": &"buzzy_beetle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_56vhr")
+}],
+"loop": 1,
+"name": &"buzzy_hit",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_po0sg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_haro7")
+}],
+"loop": 1,
+"name": &"galoomba",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0830c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ghaa6")
+}],
+"loop": 1,
+"name": &"koopa",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1dp5w")
+}],
+"loop": 1,
+"name": &"koopa_hit",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gyc6d"]
+size = Vector2(14.666667, 15)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_0830c"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+
+[node name="Enemy" type="Area2D" unique_id=66331532]
+script = ExtResource("1_287tu")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=657925316]
+position = Vector2(0, -16.5)
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_g7b7a")
+animation = &"galoomba"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=221333784]
+position = Vector2(0, -16.5)
+scale = Vector2(3, 3)
+shape = SubResource("RectangleShape2D_gyc6d")
+
+[node name="KickSound" type="AudioStreamPlayer" parent="." unique_id=668645051]
+stream = ExtResource("5_0830c")
+bus = &"SFX"
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1987529282]
+replication_config = SubResource("SceneReplicationConfig_0830c")

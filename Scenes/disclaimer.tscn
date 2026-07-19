@@ -1,0 +1,134 @@
+[gd_scene format=3 uid="uid://c1panxfkqlsnb"]
+
+[ext_resource type="Texture2D" uid="uid://d2vij3x7csiw1" path="res://Assets/Sprites/Backgrounds/disclaimer_background.png" id="1_0g2iu"]
+[ext_resource type="Script" uid="uid://db48s5js5bjtr" path="res://Scripts/Godot/disclaimer.gd" id="1_jsy5x"]
+[ext_resource type="Shader" uid="uid://dekkbq24lkwn6" path="res://Scripts/Shaders/disclaimer.gdshader" id="1_ytdvg"]
+[ext_resource type="Texture2D" uid="uid://6xll3gbbxdro" path="res://Assets/Sprites/Other/mario_jump_anim.png" id="3_bn1hb"]
+[ext_resource type="Texture2D" uid="uid://b3lceig6a05gp" path="res://Assets/Sprites/Other/message_box.png" id="4_f0bc7"]
+[ext_resource type="AudioStream" uid="uid://deb0y1nsswt2n" path="res://Assets/Audio/SFXs/jump.wav" id="5_w43qs"]
+[ext_resource type="FontFile" uid="uid://cfsere62no2hw" path="res://Assets/Sprites/Fonts/Super-Mario-World.ttf" id="6_5y8nr"]
+[ext_resource type="AudioStream" uid="uid://luq5t2bsvjlx" path="res://Assets/Audio/SFXs/disclaimer.wav" id="7_igdl1"]
+[ext_resource type="AudioStream" uid="uid://7hsnhkguuf3c" path="res://Assets/Audio/SFXs/bump.wav" id="7_pl7dp"]
+[ext_resource type="Shader" uid="uid://c3m2wrvlm3i3r" path="res://Scripts/Shaders/crtshader.gdshader" id="10_pl7dp"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ytdvg"]
+shader = ExtResource("1_ytdvg")
+shader_parameter/pixel_scale = 3.0
+shader_parameter/speed = 8.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f0bc7"]
+atlas = ExtResource("3_bn1hb")
+region = Rect2(0, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xy0rx"]
+atlas = ExtResource("3_bn1hb")
+region = Rect2(16, 0, 16, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ytdvg"]
+animations = [{
+"frames": [{
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_f0bc7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xy0rx")
+}],
+"loop": 0,
+"name": &"jump",
+"speed": 5.0
+}]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cyrrf"]
+shader = ExtResource("10_pl7dp")
+shader_parameter/curvature = 0.08
+shader_parameter/scanline_count = 400.0
+shader_parameter/scanline_opacity = 0.25
+shader_parameter/vignette_opacity = 0.2
+
+[node name="Disclaimer" type="Control" unique_id=1555679073]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_jsy5x")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=94101692]
+scale = Vector2(1.523798, 1.0124556)
+transform = Transform2D(1.523798, 0, 0, 1.0124556, 0, 0)
+
+[node name="Background" type="TextureRect" parent="CanvasLayer" unique_id=296511956]
+top_level = true
+z_index = -1
+texture_filter = 1
+texture_repeat = 2
+material = SubResource("ShaderMaterial_ytdvg")
+offset_right = 661.5
+offset_bottom = 430.87595
+scale = Vector2(1.1430776, 1.4854116)
+size_flags_stretch_ratio = 0.0
+texture = ExtResource("1_0g2iu")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="Mario" type="AnimatedSprite2D" parent="CanvasLayer" unique_id=1338086771]
+position = Vector2(374.39343, 688.9191)
+scale = Vector2(2.014, 2.9939578)
+sprite_frames = SubResource("SpriteFrames_ytdvg")
+animation = &"jump"
+frame = 1
+frame_progress = 1.0
+
+[node name="Jump" type="AudioStreamPlayer" parent="CanvasLayer/Mario" unique_id=1830260574]
+stream = ExtResource("5_w43qs")
+
+[node name="MessageBlock" type="Sprite2D" parent="CanvasLayer" unique_id=109340348]
+z_index = -1
+position = Vector2(374.39346, 378.2882)
+scale = Vector2(2, 3)
+texture = ExtResource("4_f0bc7")
+
+[node name="Bump" type="AudioStreamPlayer" parent="CanvasLayer/MessageBlock" unique_id=358488207]
+stream = ExtResource("7_pl7dp")
+
+[node name="Disclaimer" type="AudioStreamPlayer" parent="CanvasLayer/MessageBlock" unique_id=117593084]
+stream = ExtResource("7_igdl1")
+
+[node name="MessageBox" type="ColorRect" parent="CanvasLayer" unique_id=1795810025]
+anchors_preset = -1
+offset_left = 196.87646
+offset_top = 86.9174
+offset_right = 559.1292
+offset_bottom = 410.88226
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="CanvasLayer/MessageBox" unique_id=2077085544]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 0
+offset_left = 13.1251
+offset_top = 19.753952
+offset_right = 523.99445
+offset_bottom = 300.26007
+scale = Vector2(0.65, 1)
+theme_override_fonts/font = ExtResource("6_5y8nr")
+theme_override_font_sizes/font_size = 26
+text = "DISCLAIMER_MESSAGE"
+autowrap_mode = 2
+
+[node name="CRTOverlay" type="ColorRect" parent="CanvasLayer" unique_id=240882054]
+visible = false
+top_level = true
+z_index = 1
+z_as_relative = false
+material = SubResource("ShaderMaterial_cyrrf")
+offset_left = -2.468628
+offset_top = -1.9753952
+offset_right = 756.6619
+offset_bottom = 643.9789
+mouse_filter = 2
+color = Color(0, 0, 0, 1)

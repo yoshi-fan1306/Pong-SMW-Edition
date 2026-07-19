@@ -1,0 +1,132 @@
+[gd_scene format=3 uid="uid://d1hstihubrp0b"]
+
+[ext_resource type="Texture2D" uid="uid://t7bgq1wkdp7n" path="res://Assets/Sprites/Items/bubble.png" id="1_c34ne"]
+[ext_resource type="Script" uid="uid://bcct25j51c7to" path="res://Scenes/power_up_bubble.gd" id="1_qoj74"]
+[ext_resource type="Texture2D" uid="uid://ox80be5rit3e" path="res://Assets/Sprites/Items/bubble_pop.png" id="3_lv1o7"]
+[ext_resource type="Texture2D" uid="uid://donfewvh0hqw" path="res://Assets/Sprites/Items/mushroom.png" id="4_ypxfx"]
+[ext_resource type="Texture2D" uid="uid://dq8spgvmen6d" path="res://Assets/Sprites/Items/lightning_bolt.png" id="5_01ljt"]
+[ext_resource type="AudioStream" uid="uid://ttu0id31icia" path="res://Assets/Audio/SFXs/pop.wav" id="6_01ljt"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qoj74"]
+atlas = ExtResource("1_c34ne")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lv1o7"]
+atlas = ExtResource("1_c34ne")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_761xg"]
+atlas = ExtResource("1_c34ne")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ypxfx"]
+atlas = ExtResource("3_lv1o7")
+region = Rect2(0, 0, 25, 23)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_01ljt"]
+atlas = ExtResource("3_lv1o7")
+region = Rect2(25, 0, 25, 23)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xrv66"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qoj74")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lv1o7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_761xg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lv1o7")
+}],
+"loop": 0,
+"name": &"default",
+"speed": 7.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ypxfx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_01ljt")
+}],
+"loop": 0,
+"name": &"pop",
+"speed": 7.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u1l6e"]
+atlas = ExtResource("5_01ljt")
+region = Rect2(0, 0, 8, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_37rit"]
+atlas = ExtResource("5_01ljt")
+region = Rect2(8, 0, 8, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_g7b7a"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u1l6e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_37rit")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 8.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gyc6d"]
+size = Vector2(24, 24)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ypxfx"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+
+[node name="PowerUpBubble" type="Area2D" unique_id=1096792188 node_paths=PackedStringArray("mushroom_texture", "lightningbolt_texture")]
+scale = Vector2(2, 2)
+script = ExtResource("1_qoj74")
+mushroom_texture = NodePath("ItemSprite/Mushroom")
+lightningbolt_texture = NodePath("ItemSprite/LightningBolt")
+
+[node name="BubbleSprite" type="AnimatedSprite2D" parent="." unique_id=1172324068]
+position = Vector2(0, -24.5)
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_xrv66")
+
+[node name="ItemSprite" type="Sprite2D" parent="." unique_id=178362179]
+position = Vector2(0, -24.5)
+scale = Vector2(1.5, 1.5)
+
+[node name="Mushroom" type="Sprite2D" parent="ItemSprite" unique_id=74302439]
+z_index = -1
+position = Vector2(0, 5)
+texture = ExtResource("4_ypxfx")
+
+[node name="LightningBolt" type="AnimatedSprite2D" parent="ItemSprite" unique_id=114431752]
+z_index = -1
+position = Vector2(0, 5)
+scale = Vector2(1, 0.99999994)
+sprite_frames = SubResource("SpriteFrames_g7b7a")
+frame_progress = 0.7267485
+
+[node name="PopSound" type="AudioStreamPlayer" parent="ItemSprite" unique_id=220949522]
+stream = ExtResource("6_01ljt")
+bus = &"SFX"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2019161767]
+position = Vector2(0, -24.5)
+scale = Vector2(1.5, 1.5)
+shape = SubResource("RectangleShape2D_gyc6d")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=742512664]
+position = Vector2(0, -24.5)
+scale = Vector2(1.5, 1.5)
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=823632693]
+replication_config = SubResource("SceneReplicationConfig_ypxfx")

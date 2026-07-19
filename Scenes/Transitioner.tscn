@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://k50irylsje0m"]
+
+[ext_resource type="Script" uid="uid://om57dhivoo2q" path="res://Scripts/Godot/transitioner.gd" id="1_oi7ig"]
+
+[node name="Transitioner" type="CanvasLayer" unique_id=1597016046]
+layer = 100
+script = ExtResource("1_oi7ig")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=350301978]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[connection signal="ready" from="." to="." method="_ready"]

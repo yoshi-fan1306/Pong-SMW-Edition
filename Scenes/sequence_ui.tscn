@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://cogqwp34fba7t"]
+
+[ext_resource type="Script" uid="uid://d11kl6gwm0fmq" path="res://Scenes/sequence_ui.gd" id="1_3j8fw"]
+[ext_resource type="Texture2D" uid="uid://be2r0qdgettvi" path="res://Assets/Sprites/Other/game_start.png" id="2_ljgf6"]
+[ext_resource type="Shader" uid="uid://c3m2wrvlm3i3r" path="res://Scripts/Godot/crtshader.gdshader" id="3_ljgf6"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rc086"]
+shader = ExtResource("3_ljgf6")
+shader_parameter/curvature = 0.08
+shader_parameter/scanline_count = 400.0
+shader_parameter/scanline_opacity = 0.25
+shader_parameter/vignette_opacity = 0.2
+
+[node name="SequenceUI" type="CanvasLayer" unique_id=23900624]
+process_mode = 3
+layer = 128
+script = ExtResource("1_3j8fw")
+
+[node name="Background" type="ColorRect" parent="." unique_id=1636403740]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="SequenceText" type="TextureRect" parent="." unique_id=1217311526]
+z_index = 1
+offset_left = 432.00003
+offset_top = 300.0
+offset_right = 528.0
+offset_bottom = 316.0
+scale = Vector2(3, 3)
+texture = ExtResource("2_ljgf6")
+stretch_mode = 5
+
+[node name="CRTOverlay" type="ColorRect" parent="." unique_id=920785976]
+visible = false
+top_level = true
+z_index = 1
+z_as_relative = false
+material = SubResource("ShaderMaterial_rc086")
+offset_left = -2.468628
+offset_top = -1.9753952
+offset_right = 1148.0
+offset_bottom = 643.9789
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
