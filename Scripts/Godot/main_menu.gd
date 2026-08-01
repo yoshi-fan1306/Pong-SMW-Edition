@@ -16,24 +16,39 @@ var active_target_button: Button = null
 var intro_music = preload("res://Assets/Audio/Music/main_menu_music_i.ogg")
 var loop_music = preload("res://Assets/Audio/Music/main_menu_music.ogg")
 var is_starting_game: bool = false
+var can_interact: bool = false
+var is_sliding: bool = false
+var menu_bar_original_x: float = 600.0
+var title_original_x: float = 0.0
+
+@export var title_left_offset: float = -190.0
 
 @onready var title_screen = $CanvasLayer/UIContainer/Title
-@onready var main_menu_buttons = $CanvasLayer/UIContainer/MainMenuButtons
-@onready var npc_diff_menu = $CanvasLayer/UIContainer/NPCDiffMenu
-@onready var points_menu = $CanvasLayer/UIContainer/PointsMenu
-@onready var multiplayer_menu = $CanvasLayer/UIContainer/MultiplayerMenu
-@onready var settings_menu = $CanvasLayer/UIContainer/SettingsMenu
+@onready var menu_bar = $CanvasLayer/UIContainer/MenuBar
+@onready var main_menu_buttons = $CanvasLayer/UIContainer/MenuBar/MainMenuButtons
+@onready var npc_diff_menu = $CanvasLayer/UIContainer/MenuBar/NPCDiffMenu
+@onready var points_menu = $CanvasLayer/UIContainer/MenuBar/PointsMenu
+@onready var multiplayer_menu = $CanvasLayer/UIContainer/MenuBar/MultiplayerMenu
+@onready var settings_menu = $CanvasLayer/UIContainer/MenuBar/SettingsMenu
+@onready var multiplayer_status_label = $CanvasLayer/UIContainer/MenuBar/MultiplayerStatusLabel
+@onready var join_input_dialog = $CanvasLayer/UIContainer/MenuBar/MultiplayerStatusLabel/JoinInputDialog
+@onready var join_line_edit = join_input_dialog.get_node("JoinLineEdit") 
+@onready var discord_button = $CanvasLayer/UIContainer/MenuBar/DiscordButton
+@onready var github_button = $CanvasLayer/UIContainer/MenuBar/GitHubButton
+
 @onready var red_arrow = $CanvasLayer/UIContainer/RedArrow
 @onready var music_player = $MusicPlayer
 @onready var iris_rect = $IrisRect
 @onready var crt_overlay = $CanvasLayer/UIContainer/CRTOverlay
 @onready var arrow_sound = $ArrowSound
 @onready var click_sound = $ClickSound
-@onready var multiplayer_status_label = $CanvasLayer/UIContainer/MultiplayerStatusLabel
-@onready var join_input_dialog = $CanvasLayer/UIContainer/MultiplayerStatusLabel/JoinInputDialog
-@onready var join_line_edit = join_input_dialog.get_node("JoinLineEdit") 
 
 func _ready() -> void:
+	_enable_interaction_timer()
+	if title_screen:
+		title_original_x = title_screen.position.x
+	if menu_bar:
+		menu_bar.position.x = menu_bar_original_x + 900
 	_load_settings() 
 	if crt_overlay:
 		crt_overlay.visible = tv_effect_on
@@ -61,6 +76,10 @@ func _ready() -> void:
 		var iris_tween = create_tween()
 		iris_tween.tween_property(iris_rect.material, "shader_parameter/radius", 1.5, 1.0)
 	_update_settings_text()
+
+func _enable_interaction_timer() -> void:
+	await get_tree().create_timer(2.0).timeout
+	can_interact = true
 
 func _load_settings() -> void:
 	var config = ConfigFile.new()
@@ -139,7 +158,7 @@ func _process(_delta: float) -> void:
 	if red_arrow and red_arrow.visible:
 		var target = active_target_button
 		if is_instance_valid(target):
-			red_arrow.global_position = Vector2(target.global_position.x - 40, target.global_position.y + (target.size.y / 2) - (red_arrow.size.y / 2))
+			red_arrow.global_position = Vector2(target.global_position.x - 30, target.global_position.y + (target.size.y / 2) - (red_arrow.size.y / 2))
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_WM_GO_BACK_REQUEST:
@@ -147,6 +166,8 @@ func _notification(what: int) -> void:
 		else: get_tree().quit()
 
 func _input(event: InputEvent) -> void:
+	if not can_interact or is_sliding: 
+		return
 	if event.is_action_pressed("ui_cancel") and current_state != MenuState.TITLE:
 		_handle_back()
 		get_viewport().set_input_as_handled()
@@ -157,8 +178,33 @@ func _input(event: InputEvent) -> void:
 	if current_state == MenuState.TITLE:
 		if event is InputEventKey or event is InputEventMouseButton or event is InputEventScreenTouch or event is InputEventJoypadButton:
 			if event.is_pressed():
+				_slide_menu_in()
 				_change_state(MenuState.MAIN)
 				get_viewport().set_input_as_handled()
+
+func _slide_menu_in() -> void:
+	if menu_bar:
+		is_sliding = true
+		var tween = create_tween().set_parallel(true)
+		tween.tween_property(menu_bar, "position:x", menu_bar_original_x, 0.5)\
+			.set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
+		if title_screen:
+			tween.tween_property(title_screen, "position:x", title_original_x + title_left_offset, 0.5)\
+				.set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
+		await tween.finished
+		is_sliding = false
+
+func _slide_menu_out() -> void:
+	if menu_bar:
+		is_sliding = true
+		var tween = create_tween().set_parallel(true)
+		tween.tween_property(menu_bar, "position:x", menu_bar_original_x + 500, 0.4)\
+			.set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
+		if title_screen:
+			tween.tween_property(title_screen, "position:x", title_original_x, 0.4)\
+				.set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
+		await tween.finished
+		is_sliding = false
 
 func _on_music_finished() -> void:
 	if music_player.stream == intro_music:
@@ -180,9 +226,11 @@ func _handle_back() -> void:
 		return
 	if history.size() > 0:
 		current_state = history.pop_back()
+		_display_state(current_state)
 	else:
+		await _slide_menu_out()
 		current_state = MenuState.TITLE
-	_display_state(current_state)
+		_display_state(current_state)
 
 func _display_state(state: MenuState) -> void:
 	last_click_time = Time.get_ticks_msec()
@@ -325,3 +373,13 @@ func _update_settings_text() -> void:
 	settings_menu.get_node("OldTVButton").text = tr("OLD_TV_OPTION") + ": " + tv_status
 	settings_menu.get_node("MusicButton").text = tr("MUSIC_VOL") + ": " + str(music_volume)
 	settings_menu.get_node("SoundButton").text = tr("SOUNDS_VOL") + ": " + str(sound_volume)
+
+func _on_discord_button_pressed() -> void:
+	discord_button.play("press")
+	await get_tree().create_timer(0.5).timeout
+	discord_button.play("default")
+
+func _on_github_button_pressed() -> void:
+	github_button.play("press")
+	await get_tree().create_timer(0.5).timeout
+	github_button.play("default")
