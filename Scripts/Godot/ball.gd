@@ -5,6 +5,7 @@ extends CharacterBody2D
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var bump_sound: AudioStreamPlayer = $Bump
+@onready var big_bump_sound: AudioStreamPlayer = $BigBump
 @onready var score_sound: AudioStreamPlayer = $Score
 @onready var music_player: AudioStreamPlayer = $GameMusic
 
@@ -143,11 +144,19 @@ func _process_ball_physics(_delta: float) -> void:
 					velocity = velocity.bounce(normal)
 					velocity = velocity.normalized() * min(velocity.length() + 20.0, 1200.0)
 				if can_play_bump:
+					var sound_to_play = "bump_sound"
+					if scale.x > 1.0:
+						sound_to_play = "big_bump_sound"
 					if GameManager.current_mode == GameManager.Mode.MULTIPLAYER:
-						WebsocketManager.send_data({"type": "sound", "name": "bump_sound"})
-					if bump_sound: bump_sound.play()
+						WebsocketManager.send_data({"type": "sound", "name": sound_to_play})
+					if sound_to_play == "big_bump_sound" and big_bump_sound:
+						big_bump_sound.play()
+					elif bump_sound: 
+						bump_sound.play()
 					can_play_bump = false
 					get_tree().create_timer(0.1).timeout.connect(func(): can_play_bump = true)
+				if scale.x > 1.0: 
+					shake_screen(5.0, 0.3)
 				break
 			else:
 				velocity = velocity.bounce(normal)
@@ -174,6 +183,36 @@ func score_point(_player_num: int) -> void:
 
 func sync_visibility(new_visibility: bool) -> void: visible = new_visibility
 func sync_ball_pos(pos: Vector2) -> void: global_position = pos
+
 func play_sound_networked(sound_name: String) -> void:
-	if sound_name == "bump_sound" and bump_sound: bump_sound.play()
-	elif sound_name == "score_sound" and score_sound: score_sound.play()
+	if sound_name == "bump_sound" and bump_sound: 
+		bump_sound.play()
+	elif sound_name == "big_bump_sound" and big_bump_sound:
+		big_bump_sound.play()
+		shake_screen(5.0, 0.3)
+	elif sound_name == "score_sound" and score_sound: 
+		score_sound.play()
+
+func shake_screen(intensity: float, duration: float) -> void:
+	var camera = get_viewport().get_camera_2d()
+	var background = get_node_or_null("../AnimatedSprite2D")
+	if not camera:
+		return
+	if background and not background.has_meta("base_pos"):
+		background.set_meta("base_pos", background.position)
+	var bg_base_pos = background.get_meta("base_pos") if background else Vector2.ZERO
+	if has_meta("shake_tween"):
+		var existing_tween = get_meta("shake_tween", null)
+		if existing_tween and existing_tween.is_valid():
+			existing_tween.kill()
+	var tween = create_tween()
+	set_meta("shake_tween", tween)
+	var snap_sequence = [1.0, -1.0, 0.75, -0.75, 0.5, -0.5, 0.25, -0.25, 0.0]
+	var time_per_snap = duration / float(snap_sequence.size())
+	for multiplier in snap_sequence:
+		var cam_offset = Vector2(0, intensity * multiplier)
+		tween.tween_property(camera, "offset", cam_offset, 0.0)
+		if background:
+			var bg_offset = Vector2(0, intensity * multiplier * 3.0)
+			tween.parallel().tween_property(background, "position", bg_base_pos + bg_offset, 0.0)
+		tween.tween_interval(time_per_snap)
