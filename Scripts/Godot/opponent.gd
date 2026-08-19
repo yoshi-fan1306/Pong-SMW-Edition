@@ -4,6 +4,8 @@ var touch_target_y: float = -1.0
 var start_x: float = 0.0
 var is_shrunk: bool = false
 var original_collision_height: float = 0.0
+var is_starred: bool = false
+var original_speed: float = 0.0 
 
 @export var speed: float = 600.0
 @export var normal_texture: Texture2D
@@ -11,12 +13,16 @@ var original_collision_height: float = 0.0
 
 @onready var sprite = $Sprite2D
 @onready var collision_shape = $CollisionShape2D
+@onready var star_sparkle = $Sparkle
 @onready var power_up_sound = preload("res://Assets/Audio/SFXs/power-up.wav")
 
 func _ready():
 	motion_mode = CharacterBody2D.MOTION_MODE_FLOATING
 	safe_margin = 1.0
 	start_x = global_position.x
+	original_speed = speed
+	if star_sparkle:
+		star_sparkle.visible = false
 	if GameManager.current_mode == GameManager.Mode.MULTIPLAYER:
 		if WebsocketManager.is_host:
 			if not WebsocketManager.peer_p2_pos.is_connected(_sync_y_pos):
@@ -46,6 +52,93 @@ func apply_poison_shrink(duration: float) -> void:
 	add_child(sfx)
 	sfx.play()
 	sfx.finished.connect(sfx.queue_free)
+
+func apply_star_effect(duration: float) -> void:
+	if is_starred:
+		return
+	is_starred = true
+	speed = original_speed * 1.75
+	if sprite and not sprite.material is ShaderMaterial:
+		var shader = Shader.new()
+		shader.code = """
+		shader_type canvas_item;
+		uniform vec4 flash_color : source_color = vec4(1.0);
+		uniform float active : hint_range(0.0, 1.0) = 0.0;
+		uniform float white_overlay : hint_range(0.0, 1.0) = 0.0; 
+		
+		void fragment() {
+			vec4 tex = texture(TEXTURE, UV);
+			float luma = dot(tex.rgb, vec3(0.299, 0.587, 0.114));
+			vec3 light_tint = flash_color.rgb;
+			vec3 dark_tint = flash_color.rgb * 0.3; 
+			vec3 inverted_palette = mix(light_tint, dark_tint, luma);
+			vec3 final_effect = mix(inverted_palette, vec3(1.0), white_overlay);
+			COLOR = vec4(mix(tex.rgb, final_effect, active), tex.a);
+		}
+		"""
+		var mat = ShaderMaterial.new()
+		mat.shader = shader
+		mat.set_shader_parameter("flash_color", Color("9beac0"))
+		mat.set_shader_parameter("active", 0.0)
+		mat.set_shader_parameter("white_overlay", 0.0)
+		sprite.material = mat
+	var rainbow_tween = create_tween().set_loops()
+	var flash_time = 0.1
+	if sprite and sprite.material:
+		var smw_states = [
+			{"color": Color("9bffc0ff"), "active": 1.0, "white": 0.0},
+			{"color": Color("ffffff"), "active": 0.25, "white": 1.0},
+			{"color": Color("ffff8bff"), "active": 1.0, "white": 0.0},
+			{"color": Color("ffffff"), "active": 0.25, "white": 1.0},
+			{"color": Color("ffaca2ff"), "active": 1.0, "white": 0.0},
+			{"color": Color("ffffff"), "active": 0.25, "white": 1.0}
+		]
+		for state in smw_states:
+			rainbow_tween.tween_property(sprite.material, "shader_parameter/flash_color", state["color"], flash_time)
+			rainbow_tween.parallel().tween_property(sprite.material, "shader_parameter/active", state["active"], flash_time)
+			rainbow_tween.parallel().tween_property(sprite.material, "shader_parameter/white_overlay", state["white"], flash_time)
+	if star_sparkle:
+		spawn_sparkle()
+	await get_tree().create_timer(duration).timeout
+	if rainbow_tween and rainbow_tween.is_valid():
+		rainbow_tween.kill()
+	if is_instance_valid(sprite) and sprite.material:
+		sprite.material.set_shader_parameter("active", 0.0)
+		sprite.material.set_shader_parameter("white_overlay", 0.0)
+	speed = original_speed
+	is_starred = false
+	for sparkle in get_tree().get_nodes_in_group("star_sparkles"):
+		if is_instance_valid(sparkle):
+			sparkle.queue_free()
+
+func spawn_sparkle() -> void:
+	if not is_starred or not star_sparkle:
+		return
+	var new_sparkle = star_sparkle.duplicate()
+	add_child(new_sparkle)
+	new_sparkle.visible = true
+	new_sparkle.add_to_group("star_sparkles")
+	new_sparkle.scale = Vector2(2.5, 2.5)
+	var half_height = original_collision_height / 2.0
+	if half_height == 0: 
+		half_height = 50.0 
+	var rand_x = randf_range(25.0, 55.0)
+	if randf() > 0.5: 
+		rand_x *= -1.0
+	var rand_y = randf_range(-half_height - 15.0, half_height + 15.0)
+	new_sparkle.position = Vector2(rand_x, rand_y)
+	new_sparkle.frame_changed.connect(_on_sparkle_frame_changed.bind(new_sparkle))
+	new_sparkle.animation_finished.connect(new_sparkle.queue_free)
+	new_sparkle.animation_looped.connect(new_sparkle.queue_free)
+	new_sparkle.play()
+
+func _on_sparkle_frame_changed(sparkle_node: AnimatedSprite2D) -> void:
+	if not is_instance_valid(sparkle_node): 
+		return
+	if sparkle_node.frame == 2 and is_starred:
+		if sparkle_node.frame_changed.is_connected(_on_sparkle_frame_changed):
+			sparkle_node.frame_changed.disconnect(_on_sparkle_frame_changed.bind(sparkle_node))
+		spawn_sparkle()
 
 func get_bounce_direction(ball_pos: Vector2) -> Vector2:
 	var current_height = original_collision_height

@@ -32,7 +32,7 @@ func _load_and_apply_language():
 	var lang_idx = 0
 	if config.load("user://settings.cfg") == OK:
 		lang_idx = config.get_value("Settings", "lang_index", 0)
-	var locales = ["en", "es", "pt", "it"]
+	var locales = ["en", "es", "pt", "it", "fr"]
 	TranslationServer.set_locale(locales[clamp(lang_idx, 0, locales.size() - 1)])
 
 func play_sequence():

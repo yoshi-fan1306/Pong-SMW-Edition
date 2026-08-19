@@ -7,7 +7,7 @@ var history: Array[MenuState] = []
 var selected_mode: String = ""
 var selected_diff: String = ""
 var current_lang: int = 0
-var languages: Array[String] = ["English", "Espanol", "Portugues", "Italiano"]
+var languages: Array[String] = ["English", "Espanol", "Portugues", "Italiano", "Francais"]
 var tv_effect_on: bool = false
 var music_volume: int = 100
 var sound_volume: int = 100
@@ -93,7 +93,7 @@ func _load_settings() -> void:
 	music_volume = GameManager.music_volume
 	sound_volume = GameManager.sound_volume
 
-	var locales = ["en", "es", "pt", "it"]
+	var locales = ["en", "es", "pt", "it", "fr"]
 	TranslationServer.set_locale(locales[clamp(current_lang, 0, locales.size() - 1)])
 	_apply_audio_volumes()
 
@@ -339,7 +339,7 @@ func _on_settings_pressed() -> void:
 func _on_lang_button_pressed() -> void:
 	current_lang = (GameManager.current_lang_index + 1) % languages.size()
 	GameManager.current_lang_index = current_lang
-	var locales = ["en", "es", "pt", "it"]
+	var locales = ["en", "es", "pt", "it", "fr"]
 	TranslationServer.set_locale(locales[current_lang])
 	get_tree().root.propagate_notification(NOTIFICATION_TRANSLATION_CHANGED)
 	_update_settings_text()

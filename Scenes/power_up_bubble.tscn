@@ -1,11 +1,13 @@
 [gd_scene format=3 uid="uid://d1hstihubrp0b"]
 
 [ext_resource type="Texture2D" uid="uid://t7bgq1wkdp7n" path="res://Assets/Sprites/Items/bubble.png" id="1_c34ne"]
-[ext_resource type="Script" uid="uid://bcct25j51c7to" path="res://Scenes/power_up_bubble.gd" id="1_qoj74"]
+[ext_resource type="Script" uid="uid://bcct25j51c7to" path="res://Scripts/Godot/power_up_bubble.gd" id="1_qoj74"]
 [ext_resource type="Texture2D" uid="uid://ox80be5rit3e" path="res://Assets/Sprites/Items/bubble_pop.png" id="3_lv1o7"]
 [ext_resource type="Texture2D" uid="uid://donfewvh0hqw" path="res://Assets/Sprites/Items/mushroom.png" id="4_ypxfx"]
-[ext_resource type="Texture2D" uid="uid://dq8spgvmen6d" path="res://Assets/Sprites/Items/lightning_bolt.png" id="5_01ljt"]
+[ext_resource type="Texture2D" uid="uid://didmaje8pn1k3" path="res://Assets/Sprites/Items/star.png" id="5_01ljt"]
+[ext_resource type="Texture2D" uid="uid://dq8spgvmen6d" path="res://Assets/Sprites/Items/lightning_bolt.png" id="5_37rit"]
 [ext_resource type="AudioStream" uid="uid://ttu0id31icia" path="res://Assets/Audio/SFXs/pop.wav" id="6_01ljt"]
+[ext_resource type="AudioStream" uid="uid://bqaddo6ltb17h" path="res://Assets/Audio/Music/starman.ogg" id="7_u1l6e"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qoj74"]
 atlas = ExtResource("1_c34ne")
@@ -58,26 +60,62 @@ animations = [{
 "speed": 7.0
 }]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_u1l6e"]
-atlas = ExtResource("5_01ljt")
+[sub_resource type="AtlasTexture" id="AtlasTexture_y0kfq"]
+atlas = ExtResource("5_37rit")
 region = Rect2(0, 0, 8, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_37rit"]
-atlas = ExtResource("5_01ljt")
+[sub_resource type="AtlasTexture" id="AtlasTexture_ykmc7"]
+atlas = ExtResource("5_37rit")
 region = Rect2(8, 0, 8, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_g7b7a"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_u1l6e")
+"texture": SubResource("AtlasTexture_y0kfq")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_37rit")
+"texture": SubResource("AtlasTexture_ykmc7")
 }],
 "loop": 1,
 "name": &"default",
 "speed": 8.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mpj6r"]
+atlas = ExtResource("5_01ljt")
+region = Rect2(0, 0, 15, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kpmkb"]
+atlas = ExtResource("5_01ljt")
+region = Rect2(15, 0, 15, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i6fxc"]
+atlas = ExtResource("5_01ljt")
+region = Rect2(30, 0, 15, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ha4oe"]
+atlas = ExtResource("5_01ljt")
+region = Rect2(45, 0, 15, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gyc6d"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mpj6r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kpmkb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i6fxc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ha4oe")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gyc6d"]
@@ -88,11 +126,12 @@ properties/0/path = NodePath(".:position")
 properties/0/spawn = true
 properties/0/replication_mode = 1
 
-[node name="PowerUpBubble" type="Area2D" unique_id=1096792188 node_paths=PackedStringArray("mushroom_texture", "lightningbolt_texture")]
+[node name="PowerUpBubble" type="Area2D" unique_id=1096792188 node_paths=PackedStringArray("mushroom_texture", "lightningbolt_texture", "star_texture")]
 scale = Vector2(2, 2)
 script = ExtResource("1_qoj74")
 mushroom_texture = NodePath("ItemSprite/Mushroom")
 lightningbolt_texture = NodePath("ItemSprite/LightningBolt")
+star_texture = NodePath("ItemSprite/Star")
 
 [node name="BubbleSprite" type="AnimatedSprite2D" parent="." unique_id=1172324068]
 position = Vector2(0, -24.5)
@@ -115,9 +154,18 @@ scale = Vector2(1, 0.99999994)
 sprite_frames = SubResource("SpriteFrames_g7b7a")
 frame_progress = 0.7267485
 
+[node name="Star" type="AnimatedSprite2D" parent="ItemSprite" unique_id=383779989]
+z_index = -1
+position = Vector2(0, 5)
+sprite_frames = SubResource("SpriteFrames_gyc6d")
+
 [node name="PopSound" type="AudioStreamPlayer" parent="ItemSprite" unique_id=220949522]
 stream = ExtResource("6_01ljt")
 bus = &"SFX"
+
+[node name="Starman" type="AudioStreamPlayer" parent="ItemSprite" unique_id=599798054]
+stream = ExtResource("7_u1l6e")
+bus = &"Music"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2019161767]
 position = Vector2(0, -24.5)

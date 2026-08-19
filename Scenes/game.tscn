@@ -13,9 +13,10 @@
 [ext_resource type="Script" uid="uid://bdjkkl76a1q53" path="res://Scripts/Godot/ball.gd" id="6_1l0tm"]
 [ext_resource type="Texture2D" uid="uid://cul8f0ayqblbx" path="res://Assets/Sprites/Backgrounds/game_background8.png" id="6_fkdbe"]
 [ext_resource type="Texture2D" uid="uid://uguweanmf23k" path="res://Assets/Sprites/Backgrounds/game_background2.png" id="8_81klo"]
-[ext_resource type="Script" uid="uid://dq8ivks7gqtdb" path="res://Scripts/Godot/animated_sprite_2d.gd" id="8_exi56"]
+[ext_resource type="Script" path="res://Scripts/Godot/animated_sprite_2d.gd" id="8_exi56"]
 [ext_resource type="Texture2D" uid="uid://mukmkjiolqye" path="res://Assets/Sprites/Backgrounds/game_background3.png" id="9_tgy6u"]
-[ext_resource type="Texture2D" uid="uid://dx10rrnl3f7x5" path="res://Assets/Sprites/Items/player_small.png" id="14_mg4q0"]
+[ext_resource type="Texture2D" uid="uid://dx10rrnl3f7x5" path="res://Assets/Sprites/Items/player_small.png" id="13_vm72l"]
+[ext_resource type="Texture2D" uid="uid://lok2xs2c8tjj" path="res://Assets/Sprites/Other/sparkle.png" id="14_22asu"]
 [ext_resource type="AudioStream" uid="uid://7hsnhkguuf3c" path="res://Assets/Audio/SFXs/bump.wav" id="16_85qyi"]
 [ext_resource type="FontFile" uid="uid://bybsduhl48p54" path="res://Assets/Sprites/Fonts/Score-Hud.ttf" id="17_ewbju"]
 [ext_resource type="AudioStream" uid="uid://cdjo4a6tx0sm6" path="res://Assets/Audio/SFXs/score.wav" id="17_iivbl"]
@@ -182,6 +183,35 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_fkdbe"]
+atlas = ExtResource("14_22asu")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_81klo"]
+atlas = ExtResource("14_22asu")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tgy6u"]
+atlas = ExtResource("14_22asu")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6qx4q"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fkdbe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_81klo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tgy6u")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g7b7a"]
 size = Vector2(22, 160)
 
@@ -189,6 +219,35 @@ size = Vector2(22, 160)
 properties/0/path = NodePath(".:position")
 properties/0/spawn = true
 properties/0/replication_mode = 1
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v2cs8"]
+atlas = ExtResource("14_22asu")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_32sfa"]
+atlas = ExtResource("14_22asu")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_titue"]
+atlas = ExtResource("14_22asu")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hqkgv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v2cs8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_32sfa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_titue")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_7nbq1"]
 properties/0/path = NodePath(".:position")
@@ -243,6 +302,7 @@ properties/1/replication_mode = 1
 
 [node name="Game" type="Node2D" unique_id=200470851]
 script = ExtResource("1_iivbl")
+metadata/_edit_vertical_guides_ = [-120.0]
 
 [node name="CRTOverlay" type="ColorRect" parent="." unique_id=253428140]
 visible = false
@@ -272,12 +332,16 @@ position = Vector2(94, 315)
 motion_mode = 1
 script = ExtResource("2_wowpa")
 normal_texture = ExtResource("2_qxrlw")
-small_texture = ExtResource("14_mg4q0")
+small_texture = ExtResource("13_vm72l")
 
 [node name="Sprite2D" type="Sprite2D" parent="Player" unique_id=2068923856]
 rotation = 1.5707964
 scale = Vector2(2.5, 2.5)
 texture = ExtResource("2_qxrlw")
+
+[node name="Sparkle" type="AnimatedSprite2D" parent="Player" unique_id=1699714328]
+scale = Vector2(2.5, 2.5)
+sprite_frames = SubResource("SpriteFrames_6qx4q")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player" unique_id=1856629957]
 shape = SubResource("RectangleShape2D_g7b7a")
@@ -298,6 +362,9 @@ small_texture = ExtResource("17_vm72l")
 rotation = -1.5707964
 scale = Vector2(2.5, 2.5)
 texture = ExtResource("3_wrm1d")
+
+[node name="Sparkle" type="AnimatedSprite2D" parent="Opponent" unique_id=34731027]
+sprite_frames = SubResource("SpriteFrames_hqkgv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Opponent" unique_id=1804535128]
 shape = SubResource("RectangleShape2D_g7b7a")

@@ -12,6 +12,7 @@ config_version=5
 
 config/name="Pong: SMW Edition"
 run/main_scene="uid://c1panxfkqlsnb"
+config/quit_on_go_back=false
 config/features=PackedStringArray("4.7", "Mobile")
 boot_splash/bg_color=Color(0, 0, 0, 1)
 config/icon="uid://b1km7e1i3bt2a"
@@ -55,7 +56,7 @@ p2_down={
 
 [internationalization]
 
-locale/translations=PackedStringArray("res://translations.en.translation", "res://translations.es.translation", "res://translations.pt.translation", "res://translations.it.translation")
+locale/translations=PackedStringArray("res://translations.en.translation", "res://translations.es.translation", "res://translations.pt.translation", "res://translations.it.translation", "res://translations.fr.translation")
 
 [physics]
 
@@ -65,5 +66,5 @@ locale/translations=PackedStringArray("res://translations.en.translation", "res:
 
 textures/canvas_textures/default_texture_filter=0
 rendering_device/driver.windows="d3d12"
-renderer/rendering_method="mobile"
+renderer/rendering_method="gl_compatibility"
 textures/vram_compression/import_s3tc_bptc=true
