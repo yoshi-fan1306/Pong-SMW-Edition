@@ -1,10 +1,10 @@
 extends Node2D
 
-@onready var score_label = $HBoxContainer/ScoreSystem
+@onready var score_label = $HUDLayer/HBoxContainer/ScoreSystem
 @onready var match_music = $Ball/GameMusic
-@onready var victory_music = $HBoxContainer/ScoreSystem/MusicPlayer
-@onready var win_lose_1 = $HBoxContainer/WinLose1
-@onready var win_lose_2 = $HBoxContainer/WinLose2
+@onready var victory_music = $HUDLayer/HBoxContainer/ScoreSystem/MusicPlayer
+@onready var win_lose_1 = $HUDLayer/HBoxContainer/WinLose1
+@onready var win_lose_2 = $HUDLayer/HBoxContainer/WinLose2
 @onready var crt_overlay = $CRTOverlay
 @onready var sequence_ui = $SequenceUI
 
@@ -101,7 +101,7 @@ func player_scored(player_num: int) -> void:
 			$Ball.reset_ball()
 
 func _on_timer_timeout():
-	var enemy_types = ["galoomba", "koopa", "buzzy_beetle"]
+	var enemy_types = ["galoomba", "goombud", "koopa", "buzzy_beetle", "spiny"]
 	var e_type = enemy_types[randi() % enemy_types.size()]
 	var is_top = randi() % 2 == 0
 	var dir = 1 if randi() % 2 == 0 else -1
@@ -123,7 +123,7 @@ func spawn_powerup():
 	if not has_node("Ball") or $Ball.is_waiting or has_node("PowerUpBubble"):
 		return
 	var x_pos = clamp(randf_range(320.0, 960.0), 360.0, 920.0)
-	var item_type = 0 if randf() > 0.5 else 1
+	var item_type = randi() % 3
 	if GameManager.current_mode == GameManager.Mode.MULTIPLAYER:
 		WebsocketManager.send_data({"type": "spawn_powerup", "x": x_pos, "item_type": item_type})
 	_create_powerup(x_pos, item_type)

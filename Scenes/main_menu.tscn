@@ -2,12 +2,261 @@
 
 [ext_resource type="Script" uid="uid://b58g6qlp2gvpb" path="res://Scripts/Godot/main_menu.gd" id="1_1ehe0"]
 [ext_resource type="Texture2D" uid="uid://brfwxvkwnmtfl" path="res://Assets/Sprites/Backgrounds/mainmenu_background.png" id="2_1ehe0"]
-[ext_resource type="Shader" uid="uid://c3m2wrvlm3i3r" path="res://Scripts/Godot/crtshader.gdshader" id="3_opfnp"]
+[ext_resource type="Texture2D" uid="uid://deathnnol418r" path="res://Assets/Sprites/Other/galoomba.png" id="3_8dnnj"]
+[ext_resource type="Shader" uid="uid://c3m2wrvlm3i3r" path="res://Scripts/Shaders/crtshader.gdshader" id="3_opfnp"]
+[ext_resource type="Texture2D" uid="uid://de1yhjhk383mf" path="res://Assets/Sprites/Backgrounds/border.png" id="3_trj04"]
+[ext_resource type="Texture2D" uid="uid://dvjhhexq80sew" path="res://Assets/Sprites/Items/fireball.png" id="4_8dnnj"]
+[ext_resource type="Script" uid="uid://dddl7v668i88v" path="res://Scripts/Godot/enemies.gd" id="4_m3bi6"]
 [ext_resource type="Texture2D" uid="uid://dksbaobtg04sv" path="res://Assets/Sprites/Backgrounds/title.png" id="4_opfnp"]
+[ext_resource type="Texture2D" uid="uid://dr88a4mdw2302" path="res://Assets/Sprites/Other/buzzy_beetle.png" id="4_wyh8j"]
+[ext_resource type="Texture2D" uid="uid://tdv2bv26qt4r" path="res://Assets/Sprites/Other/koopa.png" id="5_6dk6o"]
 [ext_resource type="Texture2D" uid="uid://bmm6xryd1n6ss" path="res://Assets/Sprites/Other/redarrow.png" id="5_opfnp"]
+[ext_resource type="Texture2D" uid="uid://b402cfiulexn4" path="res://Assets/Sprites/Other/goombud.png" id="6_84iac"]
 [ext_resource type="FontFile" uid="uid://c0r7sesk3mvhj" path="res://Assets/Sprites/Fonts/super-mario-world-small-1-and-small-2.ttf.woff2" id="6_opfnp"]
+[ext_resource type="Texture2D" uid="uid://gnrvpqt34kkg" path="res://Assets/Sprites/Other/spiny.png" id="7_5n0dv"]
+[ext_resource type="Script" uid="uid://cf1cu8a7teuhu" path="res://Scripts/Godot/enemies2.gd" id="7_6dk6o"]
+[ext_resource type="Texture2D" uid="uid://c1a5b00tr6uwk" path="res://Assets/Sprites/Backgrounds/menu_bar.png" id="7_16hvj"]
 [ext_resource type="AudioStream" uid="uid://xyckhulykbjw" path="res://Assets/Audio/SFXs/fireball.wav" id="7_yhxw7"]
+[ext_resource type="Script" uid="uid://u8gu2gliqacf" path="res://Scripts/Godot/enemies3.gd" id="8_jr6u5"]
 [ext_resource type="AudioStream" uid="uid://dbq8io0squvrr" path="res://Assets/Audio/SFXs/coin.wav" id="8_trj04"]
+[ext_resource type="Script" uid="uid://cs46766lrf0fi" path="res://Scripts/Godot/enemies4.gd" id="9_6m47u"]
+[ext_resource type="Texture2D" uid="uid://dmiebunfbuuxi" path="res://Assets/Sprites/Other/discord_switch.png" id="9_t1dhk"]
+[ext_resource type="Texture2D" uid="uid://d2mqfk1o2y5h6" path="res://Assets/Sprites/Other/github_switch.png" id="10_5egv6"]
+[ext_resource type="Script" uid="uid://dky504owmloih" path="res://Scripts/Godot/ball_menu.gd" id="11_84iac"]
+[ext_resource type="Script" uid="uid://dgyb4gxckg6op" path="res://Scenes/enemies5.gd" id="12_ne6ao"]
+[ext_resource type="Script" uid="uid://b5r5fcksw70fk" path="res://Scripts/Godot/title.gd" id="13_ehtkc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ujyyl"]
+atlas = ExtResource("3_8dnnj")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mkpwh"]
+atlas = ExtResource("3_8dnnj")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4nkqq"]
+atlas = ExtResource("4_wyh8j")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ehtkc"]
+atlas = ExtResource("4_wyh8j")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6dk6o"]
+atlas = ExtResource("5_6dk6o")
+region = Rect2(0, 5, 16, 27)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jr6u5"]
+atlas = ExtResource("5_6dk6o")
+region = Rect2(16, 5, 16, 27)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tt8ml"]
+atlas = ExtResource("6_84iac")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fmarx"]
+atlas = ExtResource("6_84iac")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hkdq0"]
+atlas = ExtResource("7_5n0dv")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xcoo4"]
+atlas = ExtResource("7_5n0dv")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_345jq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ujyyl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mkpwh")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4nkqq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ehtkc")
+}],
+"loop": 1,
+"name": &"new_animation",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6dk6o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jr6u5")
+}],
+"loop": 1,
+"name": &"new_animation_1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tt8ml")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fmarx")
+}],
+"loop": 1,
+"name": &"new_animation_2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hkdq0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xcoo4")
+}],
+"loop": 1,
+"name": &"new_animation_3",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jw7lb"]
+atlas = ExtResource("3_8dnnj")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6vfk8"]
+atlas = ExtResource("3_8dnnj")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1xund"]
+atlas = ExtResource("5_6dk6o")
+region = Rect2(0, 5, 16, 27)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_msuys"]
+atlas = ExtResource("5_6dk6o")
+region = Rect2(16, 5, 16, 27)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aylim"]
+atlas = ExtResource("4_wyh8j")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y82t1"]
+atlas = ExtResource("4_wyh8j")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bmhhk"]
+atlas = ExtResource("6_84iac")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pddej"]
+atlas = ExtResource("6_84iac")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ko05x"]
+atlas = ExtResource("7_5n0dv")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_43km2"]
+atlas = ExtResource("7_5n0dv")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6qx4q"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jw7lb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6vfk8")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1xund")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_msuys")
+}],
+"loop": 1,
+"name": &"new_animation",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aylim")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y82t1")
+}],
+"loop": 1,
+"name": &"new_animation_1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bmhhk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pddej")
+}],
+"loop": 1,
+"name": &"new_animation_2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ko05x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_43km2")
+}],
+"loop": 1,
+"name": &"new_animation_3",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7nbq1"]
+atlas = ExtResource("4_8dnnj")
+region = Rect2(0, 0, 9, 9)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_exi56"]
+atlas = ExtResource("4_8dnnj")
+region = Rect2(9, 0, 9, 9)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d3cha"]
+atlas = ExtResource("4_8dnnj")
+region = Rect2(18, 0, 9, 9)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i26dy"]
+atlas = ExtResource("4_8dnnj")
+region = Rect2(27, 0, 9, 9)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_m3bi6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7nbq1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_exi56")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d3cha")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i26dy")
+}],
+"loop": 1,
+"name": &"Spin",
+"speed": 5.0
+}]
 
 [sub_resource type="Shader" id="Shader_n45e2"]
 code = "shader_type canvas_item;
@@ -32,6 +281,13 @@ shader = SubResource("Shader_n45e2")
 shader_parameter/radius = 0.0
 shader_parameter/aspect_ratio = Vector2(1.7, 1)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_n45e2"]
+shader = ExtResource("3_opfnp")
+shader_parameter/curvature = 0.08
+shader_parameter/scanline_count = 400.0
+shader_parameter/scanline_opacity = 0.25
+shader_parameter/vignette_opacity = 0.2
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6qx4q"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gyc6d"]
@@ -46,12 +302,59 @@ shader_parameter/aspect_ratio = Vector2(1.7, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wao0y"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_n45e2"]
-shader = ExtResource("3_opfnp")
-shader_parameter/curvature = 0.08
-shader_parameter/scanline_count = 400.0
-shader_parameter/scanline_opacity = 0.25
-shader_parameter/vignette_opacity = 0.2
+[sub_resource type="AtlasTexture" id="AtlasTexture_vtepg"]
+atlas = ExtResource("9_t1dhk")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8dnnj"]
+atlas = ExtResource("9_t1dhk")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_g7b7a"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vtepg")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8dnnj")
+}],
+"loop": 1,
+"name": &"press",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m3bi6"]
+atlas = ExtResource("10_5egv6")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wyh8j"]
+atlas = ExtResource("10_5egv6")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gyc6d"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m3bi6")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wyh8j")
+}],
+"loop": 1,
+"name": &"press",
+"speed": 5.0
+}]
 
 [node name="MainMenu" type="Control" unique_id=340159883]
 layout_mode = 3
@@ -60,7 +363,7 @@ offset_left = -39.0
 offset_right = 1291.0
 offset_bottom = 643.0
 script = ExtResource("1_1ehe0")
-metadata/_edit_vertical_guides_ = [34225.0]
+metadata/_edit_vertical_guides_ = [34225.0, 39.0]
 metadata/_edit_horizontal_guides_ = [11759.0]
 
 [node name="Background" type="Parallax2D" parent="." unique_id=1356090079]
@@ -73,6 +376,50 @@ limit_end = Vector2(0, 0)
 position = Vector2(614.00006, 324)
 scale = Vector2(1.7817338, 1.7802197)
 texture = ExtResource("2_1ehe0")
+
+[node name="Enemies" type="AnimatedSprite2D" parent="." unique_id=1774481563]
+scale = Vector2(2.5, 2.5)
+sprite_frames = SubResource("SpriteFrames_345jq")
+animation = &"new_animation_3"
+autoplay = "default"
+script = ExtResource("4_m3bi6")
+
+[node name="Enemies2" type="AnimatedSprite2D" parent="." unique_id=907898863]
+scale = Vector2(2.5, 2.5)
+sprite_frames = SubResource("SpriteFrames_345jq")
+animation = &"new_animation"
+autoplay = "new_animation"
+script = ExtResource("7_6dk6o")
+
+[node name="Enemies3" type="AnimatedSprite2D" parent="." unique_id=161098091]
+scale = Vector2(2.5, 2.5)
+sprite_frames = SubResource("SpriteFrames_345jq")
+animation = &"new_animation_1"
+autoplay = "new_animation_1"
+script = ExtResource("8_jr6u5")
+
+[node name="Enemies4" type="AnimatedSprite2D" parent="." unique_id=1712295038]
+scale = Vector2(2.5, 2.5)
+sprite_frames = SubResource("SpriteFrames_345jq")
+animation = &"new_animation_2"
+autoplay = "new_animation_2"
+script = ExtResource("9_6m47u")
+
+[node name="Enemies5" type="AnimatedSprite2D" parent="." unique_id=554455248]
+scale = Vector2(2.5, 2.5)
+sprite_frames = SubResource("SpriteFrames_6qx4q")
+animation = &"new_animation_3"
+autoplay = "new_animation_3"
+script = ExtResource("12_ne6ao")
+
+[node name="Ball" type="AnimatedSprite2D" parent="." unique_id=1147414317]
+position = Vector2(643, 300)
+scale = Vector2(2.5, 2.5)
+sprite_frames = SubResource("SpriteFrames_m3bi6")
+animation = &"Spin"
+autoplay = "Spin"
+speed_scale = 2.0
+script = ExtResource("11_84iac")
 
 [node name="IrisRect" type="ColorRect" parent="." unique_id=1931389549]
 z_index = 1
@@ -97,270 +444,33 @@ offset_left = -126.0
 offset_right = 1239.0
 offset_bottom = 645.0
 
-[node name="Title" type="TextureRect" parent="CanvasLayer/UIContainer" unique_id=1605650955]
+[node name="Border" type="TextureRect" parent="CanvasLayer/UIContainer" unique_id=1605650955]
+z_index = 1
+layout_mode = 0
+offset_left = 126.0
+offset_right = 1281.0
+offset_bottom = 648.0
+texture = ExtResource("3_trj04")
+
+[node name="Title" type="TextureRect" parent="CanvasLayer/UIContainer" unique_id=448683405]
 layout_mode = 0
 offset_left = 126.0
 offset_right = 1281.0
 offset_bottom = 648.0
 texture = ExtResource("4_opfnp")
+script = ExtResource("13_ehtkc")
 
 [node name="RedArrow" type="TextureRect" parent="CanvasLayer/UIContainer" unique_id=308688680]
+z_index = 1
 layout_mode = 0
 offset_left = 108.0
 offset_right = 124.0
 offset_bottom = 16.0
 texture = ExtResource("5_opfnp")
 
-[node name="MainMenuButtons" type="VBoxContainer" parent="CanvasLayer/UIContainer" unique_id=346093335]
-layout_mode = 0
-offset_left = 607.0
-offset_top = 361.0
-offset_right = 799.0
-offset_bottom = 573.0
-theme_override_constants/separation = 12
-
-[node name="VsNPCButton" type="Button" parent="CanvasLayer/UIContainer/MainMenuButtons" unique_id=1963762255]
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
-theme_override_constants/outline_size = 8
-theme_override_fonts/font = ExtResource("6_opfnp")
-theme_override_font_sizes/font_size = 16
-theme_override_styles/focus = SubResource("StyleBoxEmpty_6qx4q")
-text = "NPC_GAME"
-flat = true
-alignment = 0
-
-[node name="LocalGameButton" type="Button" parent="CanvasLayer/UIContainer/MainMenuButtons" unique_id=1526080956]
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
-theme_override_constants/outline_size = 8
-theme_override_fonts/font = ExtResource("6_opfnp")
-theme_override_font_sizes/font_size = 16
-theme_override_styles/focus = SubResource("StyleBoxEmpty_gyc6d")
-text = "LOCAL_GAME"
-flat = true
-alignment = 0
-icon_alignment = 1
-
-[node name="MultiplayerButtom" type="Button" parent="CanvasLayer/UIContainer/MainMenuButtons" unique_id=99334215]
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
-theme_override_constants/outline_size = 8
-theme_override_fonts/font = ExtResource("6_opfnp")
-theme_override_font_sizes/font_size = 16
-theme_override_styles/focus = SubResource("StyleBoxEmpty_gyc6d")
-text = "MULTIPLAYER_GAME"
-flat = true
-alignment = 0
-icon_alignment = 1
-
-[node name="SettingsButton" type="Button" parent="CanvasLayer/UIContainer/MainMenuButtons" unique_id=970570766]
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
-theme_override_constants/outline_size = 8
-theme_override_fonts/font = ExtResource("6_opfnp")
-theme_override_font_sizes/font_size = 16
-theme_override_styles/focus = SubResource("StyleBoxEmpty_gyc6d")
-text = "SETTINGS_BUTTON"
-flat = true
-alignment = 0
-icon_alignment = 1
-
-[node name="NPCDiffMenu" type="VBoxContainer" parent="CanvasLayer/UIContainer" unique_id=1096562031]
-layout_mode = 0
-offset_left = 607.0
-offset_top = 361.0
-offset_right = 799.0
-offset_bottom = 517.0
-theme_override_constants/separation = 12
-
-[node name="EasyButton" type="Button" parent="CanvasLayer/UIContainer/NPCDiffMenu" unique_id=860718397]
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
-theme_override_constants/outline_size = 8
-theme_override_fonts/font = ExtResource("6_opfnp")
-theme_override_font_sizes/font_size = 16
-theme_override_styles/focus = SubResource("StyleBoxEmpty_yhxw7")
-text = "EASY_MODE"
-flat = true
-alignment = 0
-
-[node name="MediumButtom" type="Button" parent="CanvasLayer/UIContainer/NPCDiffMenu" unique_id=125400725]
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
-theme_override_constants/outline_size = 8
-theme_override_fonts/font = ExtResource("6_opfnp")
-theme_override_font_sizes/font_size = 16
-theme_override_styles/focus = SubResource("StyleBoxEmpty_hqkgv")
-text = "MEDIUM_MODE"
-flat = true
-alignment = 0
-icon_alignment = 1
-
-[node name="HardButton" type="Button" parent="CanvasLayer/UIContainer/NPCDiffMenu" unique_id=1745039531]
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
-theme_override_constants/outline_size = 8
-theme_override_fonts/font = ExtResource("6_opfnp")
-theme_override_font_sizes/font_size = 16
-theme_override_styles/focus = SubResource("StyleBoxEmpty_hqkgv")
-text = "HARD_MODE"
-flat = true
-alignment = 0
-icon_alignment = 1
-
-[node name="MultiplayerMenu" type="VBoxContainer" parent="CanvasLayer/UIContainer" unique_id=1267604150]
-layout_mode = 0
-offset_left = 607.0
-offset_top = 361.0
-offset_right = 799.0
-offset_bottom = 461.0
-theme_override_constants/separation = 12
-
-[node name="HostGame" type="Button" parent="CanvasLayer/UIContainer/MultiplayerMenu" unique_id=266655981]
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
-theme_override_constants/outline_size = 8
-theme_override_fonts/font = ExtResource("6_opfnp")
-theme_override_font_sizes/font_size = 16
-theme_override_styles/focus = SubResource("StyleBoxEmpty_yhxw7")
-text = "HOST_GAME"
-flat = true
-alignment = 0
-
-[node name="JoinGame" type="Button" parent="CanvasLayer/UIContainer/MultiplayerMenu" unique_id=883522352]
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
-theme_override_constants/outline_size = 8
-theme_override_fonts/font = ExtResource("6_opfnp")
-theme_override_font_sizes/font_size = 16
-theme_override_styles/focus = SubResource("StyleBoxEmpty_xrv66")
-text = "JOIN_GAME"
-flat = true
-alignment = 0
-icon_alignment = 1
-
-[node name="PointsMenu" type="VBoxContainer" parent="CanvasLayer/UIContainer" unique_id=1078729048]
-layout_mode = 0
-offset_left = 607.0
-offset_top = 361.0
-offset_right = 799.0
-offset_bottom = 461.0
-theme_override_constants/separation = 12
-
-[node name="FivePointsButton" type="Button" parent="CanvasLayer/UIContainer/PointsMenu" unique_id=2035429960]
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
-theme_override_constants/outline_size = 8
-theme_override_fonts/font = ExtResource("6_opfnp")
-theme_override_font_sizes/font_size = 16
-theme_override_styles/focus = SubResource("StyleBoxEmpty_yhxw7")
-text = "5_POINTS"
-flat = true
-alignment = 0
-
-[node name="TenPointsButton" type="Button" parent="CanvasLayer/UIContainer/PointsMenu" unique_id=2039147035]
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
-theme_override_constants/outline_size = 8
-theme_override_fonts/font = ExtResource("6_opfnp")
-theme_override_font_sizes/font_size = 16
-theme_override_styles/focus = SubResource("StyleBoxEmpty_bpo87")
-text = "10_POINTS"
-flat = true
-alignment = 0
-icon_alignment = 1
-
-[node name="SettingsMenu" type="VBoxContainer" parent="CanvasLayer/UIContainer" unique_id=227621424]
-layout_mode = 0
-offset_left = 607.0
-offset_top = 361.0
-offset_right = 811.0
-offset_bottom = 573.0
-theme_override_constants/separation = 12
-
-[node name="LangButton" type="Button" parent="CanvasLayer/UIContainer/SettingsMenu" unique_id=389891601]
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
-theme_override_constants/outline_size = 8
-theme_override_fonts/font = ExtResource("6_opfnp")
-theme_override_font_sizes/font_size = 16
-theme_override_styles/focus = SubResource("StyleBoxEmpty_yhxw7")
-text = "LANGUAGES_OPTION"
-flat = true
-alignment = 0
-
-[node name="OldTVButton" type="Button" parent="CanvasLayer/UIContainer/SettingsMenu" unique_id=1783903595]
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
-theme_override_constants/outline_size = 8
-theme_override_fonts/font = ExtResource("6_opfnp")
-theme_override_font_sizes/font_size = 16
-theme_override_styles/focus = SubResource("StyleBoxEmpty_wao0y")
-text = "OLD_TV_OPTION"
-flat = true
-alignment = 0
-
-[node name="MusicButton" type="Button" parent="CanvasLayer/UIContainer/SettingsMenu" unique_id=1471866744]
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
-theme_override_constants/outline_size = 8
-theme_override_fonts/font = ExtResource("6_opfnp")
-theme_override_font_sizes/font_size = 16
-theme_override_styles/focus = SubResource("StyleBoxEmpty_wao0y")
-text = "MUSIC_VOL"
-flat = true
-alignment = 0
-
-[node name="SoundButton" type="Button" parent="CanvasLayer/UIContainer/SettingsMenu" unique_id=1898794434]
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
-theme_override_constants/outline_size = 8
-theme_override_fonts/font = ExtResource("6_opfnp")
-theme_override_font_sizes/font_size = 16
-theme_override_styles/focus = SubResource("StyleBoxEmpty_wao0y")
-text = "SOUNDS_VOL"
-flat = true
-alignment = 0
-icon_alignment = 1
-
-[node name="MultiplayerStatusLabel" type="Label" parent="CanvasLayer/UIContainer" unique_id=2004586073]
-layout_mode = 0
-offset_left = 611.0
-offset_top = 397.0
-offset_right = 830.0
-offset_bottom = 409.0
-theme_override_constants/outline_size = 8
-theme_override_fonts/font = ExtResource("6_opfnp")
-
-[node name="JoinInputDialog" type="ConfirmationDialog" parent="CanvasLayer/UIContainer/MultiplayerStatusLabel" unique_id=711910911]
-oversampling_override = 1.0
-title = "Insert lobby code:"
-position = Vector2i(480, 280)
-
-[node name="JoinLineEdit" type="LineEdit" parent="CanvasLayer/UIContainer/MultiplayerStatusLabel/JoinInputDialog" unique_id=526783862]
-offset_left = 8.0
-offset_top = 8.0
-offset_right = 192.0
-offset_bottom = 51.0
-
 [node name="CRTOverlay" type="ColorRect" parent="CanvasLayer/UIContainer" unique_id=498349915]
 visible = false
+z_index = 128
 material = SubResource("ShaderMaterial_n45e2")
 layout_mode = 1
 anchors_preset = 15
@@ -375,6 +485,289 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
+[node name="MenuBar" type="Control" parent="CanvasLayer/UIContainer" unique_id=2096962694]
+anchors_preset = 0
+offset_left = 1259.0
+offset_right = 2163.0
+offset_bottom = 647.0
+
+[node name="MenuBar" type="Sprite2D" parent="CanvasLayer/UIContainer/MenuBar" unique_id=338603839]
+position = Vector2(83.62486, 324)
+scale = Vector2(1.7458204, 1.7802196)
+texture = ExtResource("7_16hvj")
+
+[node name="MainMenuButtons" type="VBoxContainer" parent="CanvasLayer/UIContainer/MenuBar" unique_id=911298776]
+layout_mode = 0
+offset_left = 315.0
+offset_top = 108.0
+offset_right = 547.0
+offset_bottom = 320.0
+theme_override_constants/separation = 12
+
+[node name="VsNPCButton" type="Button" parent="CanvasLayer/UIContainer/MenuBar/MainMenuButtons" unique_id=1364761678]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("6_opfnp")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/focus = SubResource("StyleBoxEmpty_6qx4q")
+text = "NPC_GAME"
+flat = true
+alignment = 0
+
+[node name="LocalGameButton" type="Button" parent="CanvasLayer/UIContainer/MenuBar/MainMenuButtons" unique_id=572394124]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("6_opfnp")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/focus = SubResource("StyleBoxEmpty_gyc6d")
+text = "LOCAL_GAME"
+flat = true
+alignment = 0
+icon_alignment = 1
+
+[node name="MultiplayerButton" type="Button" parent="CanvasLayer/UIContainer/MenuBar/MainMenuButtons" unique_id=1504719455]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("6_opfnp")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/focus = SubResource("StyleBoxEmpty_gyc6d")
+text = "MULTIPLAYER_GAME"
+flat = true
+alignment = 0
+icon_alignment = 1
+
+[node name="SettingsButton" type="Button" parent="CanvasLayer/UIContainer/MenuBar/MainMenuButtons" unique_id=87150566]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("6_opfnp")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/focus = SubResource("StyleBoxEmpty_gyc6d")
+text = "SETTINGS_BUTTON"
+flat = true
+alignment = 0
+icon_alignment = 1
+
+[node name="NPCDiffMenu" type="VBoxContainer" parent="CanvasLayer/UIContainer/MenuBar" unique_id=64202032]
+layout_mode = 0
+offset_left = 315.0
+offset_top = 108.0
+offset_right = 507.0
+offset_bottom = 264.0
+theme_override_constants/separation = 12
+
+[node name="EasyButton" type="Button" parent="CanvasLayer/UIContainer/MenuBar/NPCDiffMenu" unique_id=1011159158]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("6_opfnp")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/focus = SubResource("StyleBoxEmpty_yhxw7")
+text = "EASY_MODE"
+flat = true
+alignment = 0
+
+[node name="MediumButtom" type="Button" parent="CanvasLayer/UIContainer/MenuBar/NPCDiffMenu" unique_id=1134351953]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("6_opfnp")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/focus = SubResource("StyleBoxEmpty_hqkgv")
+text = "MEDIUM_MODE"
+flat = true
+alignment = 0
+icon_alignment = 1
+
+[node name="HardButton" type="Button" parent="CanvasLayer/UIContainer/MenuBar/NPCDiffMenu" unique_id=1234759650]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("6_opfnp")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/focus = SubResource("StyleBoxEmpty_hqkgv")
+text = "HARD_MODE"
+flat = true
+alignment = 0
+icon_alignment = 1
+
+[node name="MultiplayerMenu" type="VBoxContainer" parent="CanvasLayer/UIContainer/MenuBar" unique_id=393734388]
+layout_mode = 0
+offset_left = 315.0
+offset_top = 108.0
+offset_right = 507.0
+offset_bottom = 208.0
+theme_override_constants/separation = 12
+
+[node name="HostGame" type="Button" parent="CanvasLayer/UIContainer/MenuBar/MultiplayerMenu" unique_id=680204068]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("6_opfnp")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/focus = SubResource("StyleBoxEmpty_yhxw7")
+text = "HOST_GAME"
+flat = true
+alignment = 0
+
+[node name="JoinGame" type="Button" parent="CanvasLayer/UIContainer/MenuBar/MultiplayerMenu" unique_id=1147367275]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("6_opfnp")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/focus = SubResource("StyleBoxEmpty_xrv66")
+text = "JOIN_GAME"
+flat = true
+alignment = 0
+icon_alignment = 1
+
+[node name="PointsMenu" type="VBoxContainer" parent="CanvasLayer/UIContainer/MenuBar" unique_id=1418846701]
+layout_mode = 0
+offset_left = 315.0
+offset_top = 108.0
+offset_right = 507.0
+offset_bottom = 208.0
+theme_override_constants/separation = 12
+
+[node name="FivePointsButton" type="Button" parent="CanvasLayer/UIContainer/MenuBar/PointsMenu" unique_id=1161443115]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("6_opfnp")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/focus = SubResource("StyleBoxEmpty_yhxw7")
+text = "5_POINTS"
+flat = true
+alignment = 0
+
+[node name="TenPointsButton" type="Button" parent="CanvasLayer/UIContainer/MenuBar/PointsMenu" unique_id=451674478]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("6_opfnp")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/focus = SubResource("StyleBoxEmpty_bpo87")
+text = "10_POINTS"
+flat = true
+alignment = 0
+icon_alignment = 1
+
+[node name="SettingsMenu" type="VBoxContainer" parent="CanvasLayer/UIContainer/MenuBar" unique_id=663417234]
+layout_mode = 0
+offset_left = 315.0
+offset_top = 108.0
+offset_right = 547.0
+offset_bottom = 320.0
+theme_override_constants/separation = 12
+
+[node name="LangButton" type="Button" parent="CanvasLayer/UIContainer/MenuBar/SettingsMenu" unique_id=1369305932]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("6_opfnp")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/focus = SubResource("StyleBoxEmpty_yhxw7")
+text = "LANGUAGES_OPTION"
+flat = true
+alignment = 0
+
+[node name="OldTVButton" type="Button" parent="CanvasLayer/UIContainer/MenuBar/SettingsMenu" unique_id=69999008]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("6_opfnp")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/focus = SubResource("StyleBoxEmpty_wao0y")
+text = "OLD_TV_OPTION"
+flat = true
+alignment = 0
+
+[node name="MusicButton" type="Button" parent="CanvasLayer/UIContainer/MenuBar/SettingsMenu" unique_id=130756521]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("6_opfnp")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/focus = SubResource("StyleBoxEmpty_wao0y")
+text = "MUSIC_VOL"
+flat = true
+alignment = 0
+
+[node name="SoundButton" type="Button" parent="CanvasLayer/UIContainer/MenuBar/SettingsMenu" unique_id=775472002]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("6_opfnp")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/focus = SubResource("StyleBoxEmpty_wao0y")
+text = "SOUNDS_VOL"
+flat = true
+alignment = 0
+icon_alignment = 1
+
+[node name="MultiplayerStatusLabel" type="Label" parent="CanvasLayer/UIContainer/MenuBar" unique_id=365525222]
+layout_mode = 0
+offset_left = 319.0
+offset_top = 144.0
+offset_right = 538.0
+offset_bottom = 156.0
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("6_opfnp")
+
+[node name="JoinInputDialog" type="ConfirmationDialog" parent="CanvasLayer/UIContainer/MenuBar/MultiplayerStatusLabel" unique_id=1403747522]
+oversampling_override = 1.0
+title = "Insert lobby code:"
+position = Vector2i(480, 280)
+
+[node name="JoinLineEdit" type="LineEdit" parent="CanvasLayer/UIContainer/MenuBar/MultiplayerStatusLabel/JoinInputDialog" unique_id=1712264255]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 192.0
+offset_bottom = 51.0
+
+[node name="DiscordButton" type="AnimatedSprite2D" parent="CanvasLayer/UIContainer/MenuBar" unique_id=2147469723]
+position = Vector2(411, 586)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_g7b7a")
+
+[node name="LinkButton" type="LinkButton" parent="CanvasLayer/UIContainer/MenuBar/DiscordButton" unique_id=2032249967]
+offset_left = -16.5
+offset_top = -16.0
+offset_right = 16.5
+offset_bottom = 16.0
+uri = "https://discord.gg/BA82dmfqhB"
+
+[node name="GitHubButton" type="AnimatedSprite2D" parent="CanvasLayer/UIContainer/MenuBar" unique_id=2107782605]
+position = Vector2(491, 586)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_gyc6d")
+
+[node name="LinkButton" type="LinkButton" parent="CanvasLayer/UIContainer/MenuBar/GitHubButton" unique_id=892244079]
+offset_left = -16.5
+offset_top = -16.0
+offset_right = 16.5
+offset_bottom = 16.0
+uri = "https://github.com/yoshi-fan1306/Pong-SMW-Edition"
+
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="." unique_id=342698206]
 bus = &"Music"
 
@@ -387,14 +780,16 @@ stream = ExtResource("8_trj04")
 bus = &"SFX"
 
 [connection signal="ready" from="." to="." method="_ready"]
-[connection signal="pressed" from="CanvasLayer/UIContainer/MainMenuButtons/VsNPCButton" to="." method="_on_vs_npc_pressed"]
-[connection signal="pressed" from="CanvasLayer/UIContainer/MainMenuButtons/LocalGameButton" to="." method="_on_local_game_pressed"]
-[connection signal="pressed" from="CanvasLayer/UIContainer/MainMenuButtons/MultiplayerButtom" to="." method="_on_multiplayer_pressed"]
-[connection signal="pressed" from="CanvasLayer/UIContainer/MainMenuButtons/SettingsButton" to="." method="_on_settings_pressed"]
-[connection signal="pressed" from="CanvasLayer/UIContainer/MultiplayerMenu/HostGame" to="." method="_on_host_game_pressed"]
-[connection signal="pressed" from="CanvasLayer/UIContainer/MultiplayerMenu/JoinGame" to="." method="_on_join_pressed"]
-[connection signal="pressed" from="CanvasLayer/UIContainer/SettingsMenu/LangButton" to="." method="_on_lang_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/UIContainer/SettingsMenu/OldTVButton" to="." method="_on_tv_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/UIContainer/SettingsMenu/MusicButton" to="." method="_on_music_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/UIContainer/SettingsMenu/SoundButton" to="." method="_on_sound_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/UIContainer/MenuBar/MainMenuButtons/VsNPCButton" to="." method="_on_vs_npc_pressed"]
+[connection signal="pressed" from="CanvasLayer/UIContainer/MenuBar/MainMenuButtons/LocalGameButton" to="." method="_on_local_game_pressed"]
+[connection signal="pressed" from="CanvasLayer/UIContainer/MenuBar/MainMenuButtons/MultiplayerButton" to="." method="_on_multiplayer_pressed"]
+[connection signal="pressed" from="CanvasLayer/UIContainer/MenuBar/MainMenuButtons/SettingsButton" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="CanvasLayer/UIContainer/MenuBar/MultiplayerMenu/HostGame" to="." method="_on_host_game_pressed"]
+[connection signal="pressed" from="CanvasLayer/UIContainer/MenuBar/MultiplayerMenu/JoinGame" to="." method="_on_join_pressed"]
+[connection signal="pressed" from="CanvasLayer/UIContainer/MenuBar/SettingsMenu/LangButton" to="." method="_on_lang_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/UIContainer/MenuBar/SettingsMenu/OldTVButton" to="." method="_on_tv_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/UIContainer/MenuBar/SettingsMenu/MusicButton" to="." method="_on_music_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/UIContainer/MenuBar/SettingsMenu/SoundButton" to="." method="_on_sound_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/UIContainer/MenuBar/DiscordButton/LinkButton" to="." method="_on_discord_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/UIContainer/MenuBar/GitHubButton/LinkButton" to="." method="_on_github_button_pressed"]
 [connection signal="finished" from="MusicPlayer" to="." method="_on_music_finished"]

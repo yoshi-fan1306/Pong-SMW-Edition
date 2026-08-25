@@ -24,7 +24,7 @@ func setup(type_str: String, top: bool, dir_int: int):
 
 func _ready() -> void:
 	if e_is_top == -1: 
-		var enemy_types = ["galoomba", "koopa", "buzzy_beetle"]
+		var enemy_types = ["galoomba", "goombud", "koopa", "buzzy_beetle", "spiny"]
 		e_type = enemy_types[randi() % enemy_types.size()]
 		e_is_top = 1 if (randi() % 2 == 0) else 0
 		e_dir = 1 if randi() % 2 == 0 else -1
@@ -33,9 +33,11 @@ func _ready() -> void:
 	sprite.play(e_type)
 	if e_type == "koopa":
 		sprite.position.y = 16
+		hitbox.position.y = 16
 	else:
 		var y_offset = 0 if is_top else 32
 		sprite.position.y = y_offset
+		hitbox.position.y = y_offset
 	position.y = 24.0 if is_top else 592.5
 	sprite.flip_v = is_top 
 	position.x = -100.0 if direction == 1 else 1200.0
@@ -63,6 +65,10 @@ func _on_body_entered(body: Node2D) -> void:
 			sprite.play("buzzy_hit")
 		if e_type == "galoomba":
 			sprite.stop()
+		if e_type == "goombud":
+			sprite.stop()
+		if e_type == "spiny":
+			sprite.play("spiny_hit")
 		is_dead = true
 		hitbox.set_deferred("disabled", true)
 		if kick_sound: 
