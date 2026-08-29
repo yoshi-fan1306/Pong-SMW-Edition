@@ -10,6 +10,8 @@ extends Control
 @onready var crt_overlay = $CanvasLayer/CRTOverlay
 
 var tv_effect_on: bool = true
+var music_volume: int = 100
+var sound_volume: int = 100
 
 func _ready():
 	_load_settings()
@@ -74,3 +76,9 @@ func _load_settings() -> void:
 		GameManager.music_volume = config.get_value("Settings", "music_volume", 100)
 		GameManager.sound_volume = config.get_value("Settings", "sound_volume", 100)
 	tv_effect_on = GameManager.tv_effect_enabled
+	music_volume = GameManager.music_volume
+	sound_volume = GameManager.sound_volume
+	var sfx_idx = AudioServer.get_bus_index("SFX")
+	if sfx_idx != -1:
+		AudioServer.set_bus_volume_db(sfx_idx, linear_to_db(sound_volume / 100.0))
+		AudioServer.set_bus_mute(sfx_idx, sound_volume == 0)

@@ -6,7 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://donfewvh0hqw" path="res://Assets/Sprites/Items/mushroom.png" id="4_ypxfx"]
 [ext_resource type="Texture2D" uid="uid://didmaje8pn1k3" path="res://Assets/Sprites/Items/star.png" id="5_01ljt"]
 [ext_resource type="Texture2D" uid="uid://dq8spgvmen6d" path="res://Assets/Sprites/Items/lightning_bolt.png" id="5_37rit"]
-[ext_resource type="AudioStream" uid="uid://ttu0id31icia" path="res://Assets/Audio/SFXs/pop.wav" id="6_01ljt"]
 [ext_resource type="AudioStream" uid="uid://bqaddo6ltb17h" path="res://Assets/Audio/Music/starman.ogg" id="7_u1l6e"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qoj74"]
@@ -158,10 +157,6 @@ frame_progress = 0.7267485
 z_index = -1
 position = Vector2(0, 5)
 sprite_frames = SubResource("SpriteFrames_gyc6d")
-
-[node name="PopSound" type="AudioStreamPlayer" parent="ItemSprite" unique_id=220949522]
-stream = ExtResource("6_01ljt")
-bus = &"SFX"
 
 [node name="Starman" type="AudioStreamPlayer" parent="ItemSprite" unique_id=599798054]
 stream = ExtResource("7_u1l6e")
