@@ -13,10 +13,11 @@
 [ext_resource type="Script" uid="uid://bdjkkl76a1q53" path="res://Scripts/Godot/ball.gd" id="6_1l0tm"]
 [ext_resource type="Texture2D" uid="uid://cul8f0ayqblbx" path="res://Assets/Sprites/Backgrounds/game_background8.png" id="6_fkdbe"]
 [ext_resource type="Texture2D" uid="uid://uguweanmf23k" path="res://Assets/Sprites/Backgrounds/game_background2.png" id="8_81klo"]
-[ext_resource type="Script" path="res://Scripts/Godot/animated_sprite_2d.gd" id="8_exi56"]
+[ext_resource type="Script" uid="uid://cdcabwqwnjojf" path="res://Scripts/Godot/animated_sprite_2d.gd" id="8_exi56"]
 [ext_resource type="Texture2D" uid="uid://mukmkjiolqye" path="res://Assets/Sprites/Backgrounds/game_background3.png" id="9_tgy6u"]
 [ext_resource type="Texture2D" uid="uid://dx10rrnl3f7x5" path="res://Assets/Sprites/Items/player_small.png" id="13_vm72l"]
 [ext_resource type="Texture2D" uid="uid://lok2xs2c8tjj" path="res://Assets/Sprites/Other/sparkle.png" id="14_22asu"]
+[ext_resource type="Script" uid="uid://byy1uj47yced1" path="res://Scripts/Godot/shadow_component.gd" id="15_fkdbe"]
 [ext_resource type="AudioStream" uid="uid://7hsnhkguuf3c" path="res://Assets/Audio/SFXs/bump.wav" id="16_85qyi"]
 [ext_resource type="FontFile" uid="uid://bybsduhl48p54" path="res://Assets/Sprites/Fonts/Score-Hud.ttf" id="17_ewbju"]
 [ext_resource type="AudioStream" uid="uid://cdjo4a6tx0sm6" path="res://Assets/Audio/SFXs/score.wav" id="17_iivbl"]
@@ -350,6 +351,9 @@ shape = SubResource("RectangleShape2D_g7b7a")
 replication_interval = 0.02
 replication_config = SubResource("SceneReplicationConfig_iivbl")
 
+[node name="ShadowComponent" type="Node" parent="Player" unique_id=1742281826]
+script = ExtResource("15_fkdbe")
+
 [node name="Opponent" type="CharacterBody2D" parent="." unique_id=160783620]
 z_index = 5
 position = Vector2(1060, 315)
@@ -372,6 +376,9 @@ shape = SubResource("RectangleShape2D_g7b7a")
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="Opponent" unique_id=2145449349]
 replication_interval = 0.02
 replication_config = SubResource("SceneReplicationConfig_7nbq1")
+
+[node name="ShadowComponent" type="Node" parent="Opponent" unique_id=1597563766]
+script = ExtResource("15_fkdbe")
 
 [node name="Ball" type="CharacterBody2D" parent="." unique_id=2081458185]
 z_index = 5
@@ -405,6 +412,9 @@ bus = &"SFX"
 [node name="Score" type="AudioStreamPlayer" parent="Ball" unique_id=1474446366]
 stream = ExtResource("17_iivbl")
 bus = &"SFX"
+
+[node name="ShadowComponent" type="Node" parent="Ball" unique_id=1970179973]
+script = ExtResource("15_fkdbe")
 
 [node name="EnemySpawner" type="Node2D" parent="." unique_id=2075332236]
 

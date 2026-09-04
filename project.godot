@@ -56,7 +56,7 @@ p2_down={
 
 [internationalization]
 
-locale/translations=PackedStringArray("res://translations.en.translation", "res://translations.es.translation", "res://translations.pt.translation", "res://translations.it.translation", "res://translations.fr.translation")
+locale/translations=PackedStringArray("res://translations.en.translation", "res://translations.es.translation", "res://translations.fr.translation", "res://translations.it.translation", "res://translations.pt.translation")
 
 [physics]
 

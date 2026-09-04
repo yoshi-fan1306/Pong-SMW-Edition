@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://b402cfiulexn4" path="res://Assets/Sprites/Other/goombud.png" id="5_po0sg"]
 [ext_resource type="Texture2D" uid="uid://gnrvpqt34kkg" path="res://Assets/Sprites/Other/spiny.png" id="8_haro7"]
 [ext_resource type="Texture2D" uid="uid://bwtljws2l7xmj" path="res://Assets/Sprites/Other/spiny_hit.png" id="9_56vhr"]
+[ext_resource type="Script" uid="uid://byy1uj47yced1" path="res://Scripts/Godot/shadow_component.gd" id="11_haro7"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_auwsv"]
 atlas = ExtResource("2_0830c")
@@ -173,3 +174,6 @@ bus = &"SFX"
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1987529282]
 replication_config = SubResource("SceneReplicationConfig_0830c")
+
+[node name="ShadowComponent" type="Node" parent="." unique_id=2030136786]
+script = ExtResource("11_haro7")

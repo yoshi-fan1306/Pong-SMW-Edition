@@ -21,9 +21,10 @@
 [ext_resource type="AudioStream" uid="uid://dbq8io0squvrr" path="res://Assets/Audio/SFXs/coin.wav" id="8_trj04"]
 [ext_resource type="Script" uid="uid://cs46766lrf0fi" path="res://Scripts/Godot/enemies4.gd" id="9_6m47u"]
 [ext_resource type="Texture2D" uid="uid://dmiebunfbuuxi" path="res://Assets/Sprites/Other/discord_switch.png" id="9_t1dhk"]
+[ext_resource type="Script" uid="uid://byy1uj47yced1" path="res://Scripts/Godot/shadow_component.gd" id="9_tt8ml"]
 [ext_resource type="Texture2D" uid="uid://d2mqfk1o2y5h6" path="res://Assets/Sprites/Other/github_switch.png" id="10_5egv6"]
 [ext_resource type="Script" uid="uid://dky504owmloih" path="res://Scripts/Godot/ball_menu.gd" id="11_84iac"]
-[ext_resource type="Script" uid="uid://dgyb4gxckg6op" path="res://Scenes/enemies5.gd" id="12_ne6ao"]
+[ext_resource type="Script" uid="uid://dgyb4gxckg6op" path="res://Scripts/Godot/enemies5.gd" id="12_ne6ao"]
 [ext_resource type="Script" uid="uid://b5r5fcksw70fk" path="res://Scripts/Godot/title.gd" id="13_ehtkc"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ujyyl"]
@@ -367,12 +368,14 @@ metadata/_edit_vertical_guides_ = [34225.0, 39.0]
 metadata/_edit_horizontal_guides_ = [11759.0]
 
 [node name="Background" type="Parallax2D" parent="." unique_id=1356090079]
+z_index = -1
 repeat_size = Vector2(641, 0)
 autoscroll = Vector2(-100, 0)
 limit_begin = Vector2(1152, 648)
 limit_end = Vector2(0, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="Background" unique_id=408101322]
+z_index = -1
 position = Vector2(614.00006, 324)
 scale = Vector2(1.7817338, 1.7802197)
 texture = ExtResource("2_1ehe0")
@@ -384,12 +387,18 @@ animation = &"new_animation_3"
 autoplay = "default"
 script = ExtResource("4_m3bi6")
 
+[node name="ShadowComponent" type="Node" parent="Enemies" unique_id=213984934]
+script = ExtResource("9_tt8ml")
+
 [node name="Enemies2" type="AnimatedSprite2D" parent="." unique_id=907898863]
 scale = Vector2(2.5, 2.5)
 sprite_frames = SubResource("SpriteFrames_345jq")
 animation = &"new_animation"
 autoplay = "new_animation"
 script = ExtResource("7_6dk6o")
+
+[node name="ShadowComponent" type="Node" parent="Enemies2" unique_id=1709755272]
+script = ExtResource("9_tt8ml")
 
 [node name="Enemies3" type="AnimatedSprite2D" parent="." unique_id=161098091]
 scale = Vector2(2.5, 2.5)
@@ -398,6 +407,9 @@ animation = &"new_animation_1"
 autoplay = "new_animation_1"
 script = ExtResource("8_jr6u5")
 
+[node name="ShadowComponent" type="Node" parent="Enemies3" unique_id=887655097]
+script = ExtResource("9_tt8ml")
+
 [node name="Enemies4" type="AnimatedSprite2D" parent="." unique_id=1712295038]
 scale = Vector2(2.5, 2.5)
 sprite_frames = SubResource("SpriteFrames_345jq")
@@ -405,12 +417,18 @@ animation = &"new_animation_2"
 autoplay = "new_animation_2"
 script = ExtResource("9_6m47u")
 
+[node name="ShadowComponent" type="Node" parent="Enemies4" unique_id=1413861435]
+script = ExtResource("9_tt8ml")
+
 [node name="Enemies5" type="AnimatedSprite2D" parent="." unique_id=554455248]
 scale = Vector2(2.5, 2.5)
 sprite_frames = SubResource("SpriteFrames_6qx4q")
 animation = &"new_animation_3"
 autoplay = "new_animation_3"
 script = ExtResource("12_ne6ao")
+
+[node name="ShadowComponent" type="Node" parent="Enemies5" unique_id=1367541828]
+script = ExtResource("9_tt8ml")
 
 [node name="Ball" type="AnimatedSprite2D" parent="." unique_id=1147414317]
 position = Vector2(643, 300)
@@ -420,6 +438,9 @@ animation = &"Spin"
 autoplay = "Spin"
 speed_scale = 2.0
 script = ExtResource("11_84iac")
+
+[node name="ShadowComponent" type="Node" parent="Ball" unique_id=539114693]
+script = ExtResource("9_tt8ml")
 
 [node name="IrisRect" type="ColorRect" parent="." unique_id=1931389549]
 z_index = 1
@@ -441,24 +462,27 @@ color = Color(0, 0, 0, 1)
 layout_mode = 3
 anchors_preset = 0
 offset_left = -126.0
+offset_top = -1.0
 offset_right = 1239.0
-offset_bottom = 645.0
+offset_bottom = 644.0
 
-[node name="Border" type="TextureRect" parent="CanvasLayer/UIContainer" unique_id=1605650955]
+[node name="Border" type="Sprite2D" parent="CanvasLayer/UIContainer" unique_id=519729118]
 z_index = 1
-layout_mode = 0
-offset_left = 126.0
-offset_right = 1281.0
-offset_bottom = 648.0
+position = Vector2(702, 325.25)
+scale = Vector2(1.7554946, 1.7815933)
 texture = ExtResource("3_trj04")
 
-[node name="Title" type="TextureRect" parent="CanvasLayer/UIContainer" unique_id=448683405]
-layout_mode = 0
-offset_left = 126.0
-offset_right = 1281.0
-offset_bottom = 648.0
+[node name="ShadowComponent" type="Node" parent="CanvasLayer/UIContainer/Border" unique_id=455989796]
+script = ExtResource("9_tt8ml")
+
+[node name="Title" type="Sprite2D" parent="CanvasLayer/UIContainer" unique_id=13407730]
+position = Vector2(702, 325.49997)
+scale = Vector2(1.7568388, 1.782967)
 texture = ExtResource("4_opfnp")
 script = ExtResource("13_ehtkc")
+
+[node name="ShadowComponent" type="Node" parent="CanvasLayer/UIContainer/Title" unique_id=2056602331]
+script = ExtResource("9_tt8ml")
 
 [node name="RedArrow" type="TextureRect" parent="CanvasLayer/UIContainer" unique_id=308688680]
 z_index = 1
@@ -492,6 +516,7 @@ offset_right = 2163.0
 offset_bottom = 647.0
 
 [node name="MenuBar" type="Sprite2D" parent="CanvasLayer/UIContainer/MenuBar" unique_id=338603839]
+z_index = -1
 position = Vector2(83.62486, 324)
 scale = Vector2(1.7458204, 1.7802196)
 texture = ExtResource("7_16hvj")
@@ -508,6 +533,7 @@ theme_override_constants/separation = 12
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 8
 theme_override_fonts/font = ExtResource("6_opfnp")
 theme_override_font_sizes/font_size = 16
@@ -520,6 +546,7 @@ alignment = 0
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 8
 theme_override_fonts/font = ExtResource("6_opfnp")
 theme_override_font_sizes/font_size = 16
@@ -533,6 +560,7 @@ icon_alignment = 1
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 8
 theme_override_fonts/font = ExtResource("6_opfnp")
 theme_override_font_sizes/font_size = 16
@@ -546,6 +574,7 @@ icon_alignment = 1
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 8
 theme_override_fonts/font = ExtResource("6_opfnp")
 theme_override_font_sizes/font_size = 16
@@ -567,6 +596,7 @@ theme_override_constants/separation = 12
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 8
 theme_override_fonts/font = ExtResource("6_opfnp")
 theme_override_font_sizes/font_size = 16
@@ -579,6 +609,7 @@ alignment = 0
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 8
 theme_override_fonts/font = ExtResource("6_opfnp")
 theme_override_font_sizes/font_size = 16
@@ -592,6 +623,7 @@ icon_alignment = 1
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 8
 theme_override_fonts/font = ExtResource("6_opfnp")
 theme_override_font_sizes/font_size = 16
@@ -613,6 +645,7 @@ theme_override_constants/separation = 12
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 8
 theme_override_fonts/font = ExtResource("6_opfnp")
 theme_override_font_sizes/font_size = 16
@@ -625,6 +658,7 @@ alignment = 0
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 8
 theme_override_fonts/font = ExtResource("6_opfnp")
 theme_override_font_sizes/font_size = 16
@@ -679,6 +713,7 @@ theme_override_constants/separation = 12
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 8
 theme_override_fonts/font = ExtResource("6_opfnp")
 theme_override_font_sizes/font_size = 16
@@ -691,6 +726,7 @@ alignment = 0
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 8
 theme_override_fonts/font = ExtResource("6_opfnp")
 theme_override_font_sizes/font_size = 16
@@ -703,6 +739,7 @@ alignment = 0
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 8
 theme_override_fonts/font = ExtResource("6_opfnp")
 theme_override_font_sizes/font_size = 16
@@ -715,11 +752,26 @@ alignment = 0
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 8
 theme_override_fonts/font = ExtResource("6_opfnp")
 theme_override_font_sizes/font_size = 16
 theme_override_styles/focus = SubResource("StyleBoxEmpty_wao0y")
 text = "SOUNDS_VOL"
+flat = true
+alignment = 0
+icon_alignment = 1
+
+[node name="ShadowsButton" type="Button" parent="CanvasLayer/UIContainer/MenuBar/SettingsMenu" unique_id=1331537307]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("6_opfnp")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/focus = SubResource("StyleBoxEmpty_wao0y")
+text = "SHADOWS_OPTION"
 flat = true
 alignment = 0
 icon_alignment = 1
@@ -756,6 +808,9 @@ offset_right = 16.5
 offset_bottom = 16.0
 uri = "https://discord.gg/BA82dmfqhB"
 
+[node name="ShadowComponent" type="Node" parent="CanvasLayer/UIContainer/MenuBar/DiscordButton" unique_id=1873263496]
+script = ExtResource("9_tt8ml")
+
 [node name="GitHubButton" type="AnimatedSprite2D" parent="CanvasLayer/UIContainer/MenuBar" unique_id=2107782605]
 position = Vector2(491, 586)
 scale = Vector2(2, 2)
@@ -767,6 +822,9 @@ offset_top = -16.0
 offset_right = 16.5
 offset_bottom = 16.0
 uri = "https://github.com/yoshi-fan1306/Pong-SMW-Edition"
+
+[node name="ShadowComponent" type="Node" parent="CanvasLayer/UIContainer/MenuBar/GitHubButton" unique_id=994844407]
+script = ExtResource("9_tt8ml")
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="." unique_id=342698206]
 bus = &"Music"
@@ -790,6 +848,7 @@ bus = &"SFX"
 [connection signal="pressed" from="CanvasLayer/UIContainer/MenuBar/SettingsMenu/OldTVButton" to="." method="_on_tv_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/UIContainer/MenuBar/SettingsMenu/MusicButton" to="." method="_on_music_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/UIContainer/MenuBar/SettingsMenu/SoundButton" to="." method="_on_sound_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/UIContainer/MenuBar/SettingsMenu/ShadowsButton" to="." method="_on_shadows_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/UIContainer/MenuBar/DiscordButton/LinkButton" to="." method="_on_discord_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/UIContainer/MenuBar/GitHubButton/LinkButton" to="." method="_on_github_button_pressed"]
 [connection signal="finished" from="MusicPlayer" to="." method="_on_music_finished"]

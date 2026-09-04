@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://t7bgq1wkdp7n" path="res://Assets/Sprites/Items/bubble.png" id="1_c34ne"]
 [ext_resource type="Script" uid="uid://bcct25j51c7to" path="res://Scripts/Godot/power_up_bubble.gd" id="1_qoj74"]
 [ext_resource type="Texture2D" uid="uid://ox80be5rit3e" path="res://Assets/Sprites/Items/bubble_pop.png" id="3_lv1o7"]
+[ext_resource type="Script" uid="uid://byy1uj47yced1" path="res://Scripts/Godot/shadow_component.gd" id="4_37rit"]
 [ext_resource type="Texture2D" uid="uid://donfewvh0hqw" path="res://Assets/Sprites/Items/mushroom.png" id="4_ypxfx"]
 [ext_resource type="Texture2D" uid="uid://didmaje8pn1k3" path="res://Assets/Sprites/Items/star.png" id="5_01ljt"]
 [ext_resource type="Texture2D" uid="uid://dq8spgvmen6d" path="res://Assets/Sprites/Items/lightning_bolt.png" id="5_37rit"]
@@ -137,6 +138,9 @@ position = Vector2(0, -24.5)
 scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_xrv66")
 
+[node name="ShadowComponent" type="Node" parent="BubbleSprite" unique_id=199426916]
+script = ExtResource("4_37rit")
+
 [node name="ItemSprite" type="Sprite2D" parent="." unique_id=178362179]
 position = Vector2(0, -24.5)
 scale = Vector2(1.5, 1.5)
@@ -161,6 +165,9 @@ sprite_frames = SubResource("SpriteFrames_gyc6d")
 [node name="Starman" type="AudioStreamPlayer" parent="ItemSprite" unique_id=599798054]
 stream = ExtResource("7_u1l6e")
 bus = &"Music"
+
+[node name="ShadowComponent" type="Node" parent="ItemSprite" unique_id=503512609]
+script = ExtResource("4_37rit")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2019161767]
 position = Vector2(0, -24.5)

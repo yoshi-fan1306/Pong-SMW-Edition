@@ -9,6 +9,7 @@ var selected_diff: String = ""
 var current_lang: int = 0
 var languages: Array[String] = ["English", "Espanol", "Portugues", "Italiano", "Francais"]
 var tv_effect_on: bool = false
+var shadows_on: bool = true
 var music_volume: int = 100
 var sound_volume: int = 100
 var last_click_time: int = 0
@@ -86,21 +87,24 @@ func _load_settings() -> void:
 	if config.load("user://settings.cfg") == OK:
 		GameManager.current_lang_index = config.get_value("Settings", "lang_index", 0)
 		GameManager.tv_effect_enabled = config.get_value("Settings", "tv_effect", false)
+		GameManager.shadows_enabled = config.get_value("Settings", "shadows_enabled", true) # <-- Added
 		GameManager.music_volume = config.get_value("Settings", "music_volume", 100)
 		GameManager.sound_volume = config.get_value("Settings", "sound_volume", 100)
 	current_lang = GameManager.current_lang_index
 	tv_effect_on = GameManager.tv_effect_enabled
+	shadows_on = GameManager.shadows_enabled
 	music_volume = GameManager.music_volume
 	sound_volume = GameManager.sound_volume
-
 	var locales = ["en", "es", "pt", "it", "fr"]
 	TranslationServer.set_locale(locales[clamp(current_lang, 0, locales.size() - 1)])
 	_apply_audio_volumes()
+	_apply_shadows()
 
 func _save_settings() -> void:
 	var config = ConfigFile.new()
 	config.set_value("Settings", "lang_index", GameManager.current_lang_index)
 	config.set_value("Settings", "tv_effect", GameManager.tv_effect_enabled)
+	config.set_value("Settings", "shadows_enabled", GameManager.shadows_enabled) # <-- Added
 	config.set_value("Settings", "music_volume", GameManager.music_volume)
 	config.set_value("Settings", "sound_volume", GameManager.sound_volume)
 	config.save("user://settings.cfg")
@@ -114,6 +118,9 @@ func _apply_audio_volumes() -> void:
 	if sfx_idx != -1:
 		AudioServer.set_bus_volume_db(sfx_idx, linear_to_db(sound_volume / 100.0))
 		AudioServer.set_bus_mute(sfx_idx, sound_volume == 0)
+
+func _apply_shadows() -> void:
+	get_tree().call_group("sprite_shadows", "set_visible", shadows_on)
 
 func _connect_menu_buttons() -> void:
 	var menus = [main_menu_buttons, npc_diff_menu, points_menu, multiplayer_menu, settings_menu]
@@ -353,6 +360,13 @@ func _on_tv_button_pressed() -> void:
 	_update_settings_text()
 	_save_settings()
 
+func _on_shadows_button_pressed() -> void:
+	shadows_on = !shadows_on
+	GameManager.shadows_enabled = shadows_on
+	_apply_shadows()
+	_update_settings_text()
+	_save_settings()
+
 func _on_music_button_pressed() -> void:
 	music_volume = (music_volume + 10) % 110
 	GameManager.music_volume = music_volume
@@ -371,6 +385,9 @@ func _update_settings_text() -> void:
 	settings_menu.get_node("LangButton").text = tr("LANGUAGES_OPTION") + ": " + languages[current_lang]
 	var tv_status = "ON" if tv_effect_on else "OFF"
 	settings_menu.get_node("OldTVButton").text = tr("OLD_TV_OPTION") + ": " + tv_status
+	if settings_menu.has_node("ShadowsButton"):
+		var shadow_status = "ON" if shadows_on else "OFF"
+		settings_menu.get_node("ShadowsButton").text = tr("SHADOWS_OPTION") + ": " + shadow_status
 	settings_menu.get_node("MusicButton").text = tr("MUSIC_VOL") + ": " + str(music_volume)
 	settings_menu.get_node("SoundButton").text = tr("SOUNDS_VOL") + ": " + str(sound_volume)
 

@@ -1,20 +1,51 @@
 [gd_scene format=3 uid="uid://c1panxfkqlsnb"]
 
-[ext_resource type="Texture2D" uid="uid://d2vij3x7csiw1" path="res://Assets/Sprites/Backgrounds/disclaimer_background.png" id="1_0g2iu"]
 [ext_resource type="Script" uid="uid://db48s5js5bjtr" path="res://Scripts/Godot/disclaimer.gd" id="1_jsy5x"]
-[ext_resource type="Shader" uid="uid://dekkbq24lkwn6" path="res://Scripts/Shaders/disclaimer.gdshader" id="1_ytdvg"]
+[ext_resource type="Texture2D" uid="uid://d2vij3x7csiw1" path="res://Assets/Sprites/Backgrounds/disclaimer_background.png" id="2_4tpen"]
 [ext_resource type="Texture2D" uid="uid://6xll3gbbxdro" path="res://Assets/Sprites/Other/mario_jump_anim.png" id="3_bn1hb"]
 [ext_resource type="Texture2D" uid="uid://b3lceig6a05gp" path="res://Assets/Sprites/Other/message_box.png" id="4_f0bc7"]
 [ext_resource type="AudioStream" uid="uid://deb0y1nsswt2n" path="res://Assets/Audio/SFXs/jump.wav" id="5_w43qs"]
+[ext_resource type="Script" uid="uid://byy1uj47yced1" path="res://Scripts/Godot/shadow_component.gd" id="6_5t312"]
 [ext_resource type="FontFile" uid="uid://cfsere62no2hw" path="res://Assets/Sprites/Fonts/Super-Mario-World.ttf" id="6_5y8nr"]
 [ext_resource type="AudioStream" uid="uid://luq5t2bsvjlx" path="res://Assets/Audio/SFXs/disclaimer.wav" id="7_igdl1"]
 [ext_resource type="AudioStream" uid="uid://7hsnhkguuf3c" path="res://Assets/Audio/SFXs/bump.wav" id="7_pl7dp"]
 [ext_resource type="Shader" uid="uid://c3m2wrvlm3i3r" path="res://Scripts/Shaders/crtshader.gdshader" id="10_pl7dp"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ytdvg"]
-shader = ExtResource("1_ytdvg")
-shader_parameter/pixel_scale = 3.0
-shader_parameter/speed = 8.0
+[sub_resource type="AtlasTexture" id="AtlasTexture_4tpen"]
+atlas = ExtResource("2_4tpen")
+region = Rect2(0, 0, 576, 323)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3c6l4"]
+atlas = ExtResource("2_4tpen")
+region = Rect2(576, 0, 576, 323)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5t312"]
+atlas = ExtResource("2_4tpen")
+region = Rect2(1152, 0, 576, 323)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e8o6j"]
+atlas = ExtResource("2_4tpen")
+region = Rect2(1728, 0, 576, 323)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gyc6d"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4tpen")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3c6l4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5t312")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e8o6j")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_f0bc7"]
 atlas = ExtResource("3_bn1hb")
@@ -58,19 +89,12 @@ script = ExtResource("1_jsy5x")
 scale = Vector2(1.523798, 1.0124556)
 transform = Transform2D(1.523798, 0, 0, 1.0124556, 0, 0)
 
-[node name="Background" type="TextureRect" parent="CanvasLayer" unique_id=296511956]
-top_level = true
-z_index = -1
-texture_filter = 1
-texture_repeat = 2
-material = SubResource("ShaderMaterial_ytdvg")
-offset_right = 661.5
-offset_bottom = 430.87595
-scale = Vector2(1.1430776, 1.4854116)
-size_flags_stretch_ratio = 0.0
-texture = ExtResource("1_0g2iu")
-expand_mode = 1
-stretch_mode = 1
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CanvasLayer" unique_id=1665090996]
+z_index = -2
+position = Vector2(378.0508, 320.01407)
+scale = Vector2(1.3123434, 1.9815112)
+sprite_frames = SubResource("SpriteFrames_gyc6d")
+autoplay = "default"
 
 [node name="Mario" type="AnimatedSprite2D" parent="CanvasLayer" unique_id=1338086771]
 position = Vector2(374.39343, 688.9191)
@@ -82,6 +106,10 @@ frame_progress = 1.0
 
 [node name="Jump" type="AudioStreamPlayer" parent="CanvasLayer/Mario" unique_id=1830260574]
 stream = ExtResource("5_w43qs")
+bus = &"SFX"
+
+[node name="ShadowComponent" type="Node" parent="CanvasLayer/Mario" unique_id=1029275444]
+script = ExtResource("6_5t312")
 
 [node name="MessageBlock" type="Sprite2D" parent="CanvasLayer" unique_id=109340348]
 z_index = -1
@@ -91,9 +119,14 @@ texture = ExtResource("4_f0bc7")
 
 [node name="Bump" type="AudioStreamPlayer" parent="CanvasLayer/MessageBlock" unique_id=358488207]
 stream = ExtResource("7_pl7dp")
+bus = &"SFX"
 
 [node name="Disclaimer" type="AudioStreamPlayer" parent="CanvasLayer/MessageBlock" unique_id=117593084]
 stream = ExtResource("7_igdl1")
+bus = &"SFX"
+
+[node name="ShadowComponent" type="Node" parent="CanvasLayer/MessageBlock" unique_id=790513090]
+script = ExtResource("6_5t312")
 
 [node name="MessageBox" type="ColorRect" parent="CanvasLayer" unique_id=1795810025]
 anchors_preset = -1

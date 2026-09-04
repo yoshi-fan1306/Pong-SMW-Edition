@@ -16,11 +16,29 @@ var enemy_scene = preload("res://Scenes/enemy.tscn")
 var powerup_timer: Timer
 
 func _ready():
+	_apply_audio_volumes()
 	if crt_overlay:
 		crt_overlay.visible = GameManager.tv_effect_enabled
+	GameManager.shadows_toggled.emit(GameManager.shadows_enabled)
 	sequence_ui.play_start_sequence()
 	await sequence_ui.sequence_finished
 	start_game_logic()
+
+func _apply_audio_volumes() -> void:
+	var sfx_idx = AudioServer.get_bus_index("SFX")
+	if sfx_idx != -1:
+		AudioServer.set_bus_volume_db(sfx_idx, linear_to_db(GameManager.sound_volume / 100.0))
+		AudioServer.set_bus_mute(sfx_idx, GameManager.sound_volume == 0)
+
+func _load_settings() -> void:
+	var config = ConfigFile.new()
+	if config.load("user://settings.cfg") == OK:
+		GameManager.current_lang_index = config.get_value("Settings", "lang_index", 0)
+		GameManager.tv_effect_enabled = config.get_value("Settings", "tv_effect", false)
+		GameManager.shadows_enabled = config.get_value("Settings", "shadows_enabled", true)
+		GameManager.music_volume = config.get_value("Settings", "music_volume", 100)
+		GameManager.sound_volume = config.get_value("Settings", "sound_volume", 100)
+	GameManager.shadows_toggled.emit(GameManager.shadows_enabled)
 
 func start_game_logic():
 	var global_music = get_tree().root.get_node_or_null("MusicPlayer")
