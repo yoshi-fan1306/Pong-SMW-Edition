@@ -1,7 +1,7 @@
 extends Node
 class_name ShadowComponent
 
-@export var offset: Vector2 = Vector2(3, 3)
+@export var offset: Vector2 = Vector2(5, 5)
 @export var shadow_scale: Vector2 = Vector2(1.0, 1.0)
 @export var shadow_color: Color = Color(0, 0, 0, 0.3)
 
