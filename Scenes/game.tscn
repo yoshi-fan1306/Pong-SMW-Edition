@@ -14,7 +14,9 @@
 [ext_resource type="Texture2D" uid="uid://cul8f0ayqblbx" path="res://Assets/Sprites/Backgrounds/game_background8.png" id="6_fkdbe"]
 [ext_resource type="Texture2D" uid="uid://uguweanmf23k" path="res://Assets/Sprites/Backgrounds/game_background2.png" id="8_81klo"]
 [ext_resource type="Script" uid="uid://cdcabwqwnjojf" path="res://Scripts/Godot/animated_sprite_2d.gd" id="8_exi56"]
+[ext_resource type="Texture2D" uid="uid://cb76etgn0yfr7" path="res://Assets/Sprites/Backgrounds/game_background9.png" id="8_tgy6u"]
 [ext_resource type="Texture2D" uid="uid://mukmkjiolqye" path="res://Assets/Sprites/Backgrounds/game_background3.png" id="9_tgy6u"]
+[ext_resource type="Texture2D" uid="uid://dft7ax5igyqdr" path="res://Assets/Sprites/Other/snow_particle.png" id="12_tgy6u"]
 [ext_resource type="Texture2D" uid="uid://dx10rrnl3f7x5" path="res://Assets/Sprites/Items/player_small.png" id="13_vm72l"]
 [ext_resource type="Texture2D" uid="uid://lok2xs2c8tjj" path="res://Assets/Sprites/Other/sparkle.png" id="14_22asu"]
 [ext_resource type="Script" uid="uid://byy1uj47yced1" path="res://Scripts/Godot/shadow_component.gd" id="15_fkdbe"]
@@ -26,6 +28,7 @@
 [ext_resource type="AudioStream" uid="uid://dya0rki04k8sf" path="res://Assets/Audio/SFXs/big_bump.wav" id="20_vm72l"]
 [ext_resource type="Shader" uid="uid://c3m2wrvlm3i3r" path="res://Scripts/Shaders/crtshader.gdshader" id="21_exi56"]
 [ext_resource type="PackedScene" uid="uid://cogqwp34fba7t" path="res://Scenes/sequence_ui.tscn" id="24_vm72l"]
+[ext_resource type="Shader" uid="uid://cdwoslwuc5yb1" path="res://Scripts/Shaders/snowparticles.gdshader" id="28_cwurv"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7t8sx"]
 shader = ExtResource("21_exi56")
@@ -64,6 +67,10 @@ region = Rect2(1728, 0, 576, 323)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ewbju"]
 atlas = ExtResource("4_ewbju")
+region = Rect2(0, 0, 576, 323)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tt7mg"]
+atlas = ExtResource("8_tgy6u")
 region = Rect2(0, 0, 576, 323)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6uxt2"]
@@ -147,6 +154,14 @@ animations = [{
 }],
 "loop": 0,
 "name": &"Overworld",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tt7mg")
+}],
+"loop": 1,
+"name": &"Snow",
 "speed": 5.0
 }, {
 "frames": [{
@@ -301,6 +316,15 @@ properties/1/path = NodePath(".:speed")
 properties/1/spawn = true
 properties/1/replication_mode = 1
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tgy6u"]
+shader = ExtResource("28_cwurv")
+shader_parameter/amplitude = 6.0
+shader_parameter/frequency = 0.04
+
+[sub_resource type="Gradient" id="Gradient_mucmn"]
+offsets = PackedFloat32Array(0, 0.15, 0.85, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
 [node name="Game" type="Node2D" unique_id=200470851]
 script = ExtResource("1_iivbl")
 metadata/_edit_vertical_guides_ = [-120.0]
@@ -417,12 +441,14 @@ bus = &"SFX"
 script = ExtResource("15_fkdbe")
 
 [node name="EnemySpawner" type="Node2D" parent="." unique_id=2075332236]
+visible = false
 
 [node name="Timer" type="Timer" parent="EnemySpawner" unique_id=619867581]
 wait_time = 7.5
 autostart = true
 
 [node name="HUDLayer" type="CanvasLayer" parent="." unique_id=895419010]
+layer = 2
 
 [node name="HBoxContainer" type="Control" parent="HUDLayer" unique_id=810285429]
 z_index = 1
@@ -493,6 +519,9 @@ metadata/_edit_use_anchors_ = true
 
 [node name="SequenceUI" parent="." unique_id=23900624 instance=ExtResource("24_vm72l")]
 
+[node name="Background" parent="SequenceUI" index="0" unique_id=1636403740]
+offset_transform_enabled = true
+
 [node name="CRTOverlay" parent="SequenceUI" index="2" unique_id=920785976]
 offset_left = 0.0
 offset_top = -2.9753952
@@ -501,6 +530,26 @@ offset_bottom = 657.0
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1215133876]
 position = Vector2(576, 324)
+
+[node name="SnowParticles" type="CPUParticles2D" parent="." unique_id=1757180541]
+top_level = true
+z_index = 127
+material = SubResource("ShaderMaterial_tgy6u")
+position = Vector2(576, 313)
+emitting = false
+amount = 70
+texture = ExtResource("12_tgy6u")
+lifetime = 8.0
+emission_shape = 3
+emission_rect_extents = Vector2(1152, 648)
+direction = Vector2(0.2, 1)
+spread = 0.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 30.0
+initial_velocity_max = 55.0
+scale_amount_min = 2.0
+scale_amount_max = 3.0
+color_ramp = SubResource("Gradient_mucmn")
 
 [connection signal="ready" from="." to="." method="_ready"]
 [connection signal="ready" from="Ball" to="Ball" method="_ready"]

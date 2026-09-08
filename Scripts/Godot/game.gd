@@ -119,7 +119,7 @@ func player_scored(player_num: int) -> void:
 			$Ball.reset_ball()
 
 func _on_timer_timeout():
-	var enemy_types = ["galoomba", "goombud", "koopa", "buzzy_beetle", "spiny"]
+	var enemy_types = ["galoomba", "goombud", "koopa", "koopa_red", "buzzy_beetle", "spiny"]
 	var e_type = enemy_types[randi() % enemy_types.size()]
 	var is_top = randi() % 2 == 0
 	var dir = 1 if randi() % 2 == 0 else -1

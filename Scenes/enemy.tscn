@@ -9,7 +9,9 @@
 [ext_resource type="Texture2D" uid="uid://b5eo5r6dc278l" path="res://Assets/Sprites/Other/koopa_hit.png" id="5_ghaa6"]
 [ext_resource type="Texture2D" uid="uid://b402cfiulexn4" path="res://Assets/Sprites/Other/goombud.png" id="5_po0sg"]
 [ext_resource type="Texture2D" uid="uid://gnrvpqt34kkg" path="res://Assets/Sprites/Other/spiny.png" id="8_haro7"]
+[ext_resource type="Texture2D" uid="uid://ccvfl3ciphca3" path="res://Assets/Sprites/Other/koopa_red.png" id="8_ta2yt"]
 [ext_resource type="Texture2D" uid="uid://bwtljws2l7xmj" path="res://Assets/Sprites/Other/spiny_hit.png" id="9_56vhr"]
+[ext_resource type="Texture2D" uid="uid://ciigxg43pn33w" path="res://Assets/Sprites/Other/koopa_red_hit.png" id="9_m4x7e"]
 [ext_resource type="Script" uid="uid://byy1uj47yced1" path="res://Scripts/Godot/shadow_component.gd" id="11_haro7"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_auwsv"]
@@ -50,6 +52,18 @@ region = Rect2(16, 5, 16, 27)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1dp5w"]
 atlas = ExtResource("5_ghaa6")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_scl1n"]
+atlas = ExtResource("8_ta2yt")
+region = Rect2(0, 5, 16, 27)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dhkrs"]
+atlas = ExtResource("8_ta2yt")
+region = Rect2(16, 5, 16, 27)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5xdhn"]
+atlas = ExtResource("9_m4x7e")
 region = Rect2(0, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vt4ob"]
@@ -124,6 +138,25 @@ animations = [{
 }],
 "loop": 1,
 "name": &"koopa_hit",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_scl1n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dhkrs")
+}],
+"loop": 1,
+"name": &"koopa_red",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5xdhn")
+}],
+"loop": 1,
+"name": &"koopa_red_hit",
 "speed": 5.0
 }, {
 "frames": [{

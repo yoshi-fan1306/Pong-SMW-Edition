@@ -24,14 +24,14 @@ func setup(type_str: String, top: bool, dir_int: int):
 
 func _ready() -> void:
 	if e_is_top == -1: 
-		var enemy_types = ["galoomba", "goombud", "koopa", "buzzy_beetle", "spiny"]
+		var enemy_types = ["galoomba", "goombud", "koopa", "koopa_red", "buzzy_beetle", "spiny"]
 		e_type = enemy_types[randi() % enemy_types.size()]
 		e_is_top = 1 if (randi() % 2 == 0) else 0
 		e_dir = 1 if randi() % 2 == 0 else -1
 	var is_top = (e_is_top == 1)
 	direction = e_dir
 	sprite.play(e_type)
-	if e_type == "koopa":
+	if e_type == "koopa" or e_type == "koopa_red":
 		sprite.position.y = 16
 		hitbox.position.y = 16
 	else:
@@ -61,6 +61,8 @@ func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("ball") and not is_dead:
 		if e_type == "koopa":
 			sprite.play("koopa_hit")
+		if e_type == "koopa_red":
+			sprite.play("koopa_red_hit")
 		if e_type == "buzzy_beetle":
 			sprite.play("buzzy_hit")
 		if e_type == "galoomba":
